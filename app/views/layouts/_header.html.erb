@@ -1,32 +1,17 @@
 <header>
       <nav class="navbar navbar-expand-lg navbar-light p-4">
-        <% if user_signed_in? %>
-          <%= link_to root_path do %>
-            <%= image_tag "2656826.jpg", size: "100x70", class: "d-none d-sm-block mr-3" %>
-          <% end %>
-        <% else %>
-          <%= link_to root_path do %>
-            <%= image_tag '2656826.jpg', size: '100x70', class: "d-none d-sm-block mr-3"%>
-          <% end %>
-        <% end %>
+
         <div class="flex-column">
-          <h1 class="">Oscar-Denims</h1>
+          <h1 class="">Jeans</h1>
           <small class="ml-2">投稿サイト</small>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
-            <li class="nav-item mr-3">
-              <%= form_with(url: search_recipes_path, local: true, method: :get, class: "search-field") do |f| %>
-                <%= f.text_field :keyword, placeholder: "レシピを検索する", class: "form-control" %>
-                <%= button_tag type: 'submit', class: 'btn search-icon' do %>
-                  <i class="fas fa-search"></i>
-                <% end %>
-              <% end %>
-            </li>
+
             <li class="nav-item">
               <%= link_to 'マイページ', my_page_path, class: 'nav-link text-dark' %>
             </li>
@@ -37,14 +22,6 @@
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
             </li>
           <% else %>
-            <li class="nav-item mr-3">
-              <%= form_with(url: search_recipes_path, local: true, method: :get, class: "search-field") do |f| %>
-                <%= f.text_field :keyword, placeholder: "レシピを検索する", class: "form-control" %>
-                <%= button_tag type: 'submit', class: 'btn search-icon' do %>
-                  <i class="fas fa-search"></i>
-                <% end %>
-              <% end %>
-            </li>
             <li class="nav-item">
               <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
             </li>
