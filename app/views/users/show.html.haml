@@ -1,0 +1,12 @@
+.container
+  .row
+    %h1.col-12 Register your jeans
+    = form_with model: @jeans, url: jeans_index_path do |f|
+      .form-group
+        = f.collection_select :brand_id, Brand.all, :id, :name, { prompt: "Coose Your Brand"}, {class: "selectpicker"}
+      .form-group
+        = f.collection_select :lot_id, Lot.all, :id, :number, { prompt: "Coose Your Lots"}, {class: "selectpicker"}
+      .form-group
+        %p When did you purchase?
+        = f.datetime_field :date_of_purchase, {class: "form-control"}
+      = f.submit  class: "btn btn-primary"

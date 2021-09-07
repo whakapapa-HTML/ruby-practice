@@ -1,0 +1,28 @@
+.container.mb-4
+  .card.col-lg-6.col-md-10.col-sm-12.m-auto
+    .card-body
+      %h2 新規登録
+      .col-10.m-auto.pb-3
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          .mb-4
+            = f.label :"名前"
+            %br/
+            = f.text_field :name, autofocus: true, class: "form-control col m-auto"
+          .mb-4
+            = f.label :"メールアドレス"
+            %br/
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control col m-auto"
+          .mb-4
+            = f.label :"パスワード"
+            - if @minimum_password_length
+              %em
+                (#{@minimum_password_length}字以上(英数半))
+            %br/
+            = f.password_field :password, autocomplete: "new-password", class: "form-control col m-auto"
+          .mb-4
+            = f.label :"パスワード確認"
+            %br/
+            = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control col m-auto"
+          .actions
+            = f.submit "新規登録", class: "btn btn-primary col-6 m-auto"
+        = render "devise/shared/links"

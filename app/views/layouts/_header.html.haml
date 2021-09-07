@@ -1,0 +1,21 @@
+%body
+  %header
+    %nav.navbar.navbar-expand-lg.navbar-light.p-4
+      .flex-column
+        %h1 Jeans
+        %small.ml-2 post your jeans
+      %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
+      #navbarNavDropdown.collapse.navbar-collapse
+        %ul.navbar-nav.ml-auto
+          - if user_signed_in?
+            %li.nav-item
+              = link_to 'mypage', my_page_path, class: 'nav-link text-dark'
+            %li.nav-item
+              = link_to "post", posts_path, method: :post, class: 'nav-link text-dark'
+            %li.nav-item
+              = link_to "logout", destroy_user_session_path, method: :delete, class: 'nav-link text-dark'
+          - else
+            %li.nav-item
+              = link_to "signup", new_user_registration_path, class: 'nav-link text-dark'
+            %li.nav-item
+              = link_to "login", new_user_session_path, class: 'nav-link text-dark'
