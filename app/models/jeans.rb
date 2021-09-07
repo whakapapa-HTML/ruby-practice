@@ -3,4 +3,6 @@ class Jeans < ApplicationRecord
   belongs_to :brand
   belongs_to :user
   has_many :posts
+
+  mount_uploader :jeans_image, JeansUploade
 end

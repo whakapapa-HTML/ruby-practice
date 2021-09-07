@@ -1,12 +1,21 @@
 .container
-  .row
+  .row.mx-auto
     %h1.col-12 Register your jeans
     = form_with model: @jeans, url: jeans_index_path do |f|
+      .form_group
+        -if @user_jeans.present?
+          = image_tag current_user.jeans_image, id: :img_prev
+        -else
+          = image_tag 'no_jeans.jpg', id: :img_prev, size: "120x120"
+      %label.label
+        = fa_icon'image'
+        = f.file_field :jeans_image, {class: "file_field_message"}
       .form-group
-        = f.collection_select :brand_id, Brand.all, :id, :name, { prompt: "Coose Your Brand"}, {class: "selectpicker"}
+        = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: "Select Jeans Brand"}, {class: "selectpicker"}
       .form-group
-        = f.collection_select :lot_id, Lot.all, :id, :number, { prompt: "Coose Your Lots"}, {class: "selectpicker"}
+        = f.collection_select :lot_id, Lot.all, :id, :number, {prompt: "Select Jeans Lots"}, {class: "selectpicker"}
       .form-group
         %p When did you purchase?
-        = f.datetime_field :date_of_purchase, {class: "form-control"}
+        = f.date_field :date_of_purchase, {class: "form-control text-gray"}
+        = f.hidden_field :user_id, value: current_user.id
       = f.submit  class: "btn btn-primary"
