@@ -12,14 +12,13 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require bootstrap-select
 //
 //= require rails-ujs
+//= require bootstrap-select
 //= require activestorage
-//= require turbolinks
 //= require_tree .
 
-
+/*global jQuery $*/
 
   $(function() {
     function readURL(input) {

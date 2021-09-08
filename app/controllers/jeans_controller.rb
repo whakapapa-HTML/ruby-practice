@@ -6,9 +6,8 @@ class JeansController < ApplicationController
   def create
     @jean = Jeans.new(jeans_params)
     if @jean.save
-      redirect_to my_page_path
     else
-      render new
+      render "users/show"
     end
   end
 

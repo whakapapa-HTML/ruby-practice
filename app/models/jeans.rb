@@ -4,5 +4,5 @@ class Jeans < ApplicationRecord
   belongs_to :user
   has_many :posts
 
-  mount_uploader :jeans_image, JeansUploade
+  mount_uploader :jeans_image, JeansUploader
 end

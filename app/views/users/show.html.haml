@@ -1,21 +1,31 @@
 .container
   .row.mx-auto
-    %h1.col-12 Register your jeans
-    = form_with model: @jeans, url: jeans_index_path do |f|
+    %h1.col-12.mb-5 Register your jeans
+    = form_with model: @new_jeans, url: jeans_index_path, class: "col-6", data: {remote: true} do |f|
       .form_group
-        -if @user_jeans.present?
-          = image_tag current_user.jeans_image, id: :img_prev
+        %p ◆ Select jeans image.
+        -if @new_jeans.jeans_image.url
+          = image_tag @new_jeans.jeans_image, id: :img_prev
         -else
-          = image_tag 'no_jeans.jpg', id: :img_prev, size: "120x120"
+          = image_tag 'no_jeans.jpg', id: :img_prev, size: "200x230"
       %label.label
         = fa_icon'image'
-        = f.file_field :jeans_image, {class: "file_field_message"}
+        = f.file_field :jeans_image, {class: "file_field_message", id: "user_img"}
       .form-group
-        = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: "Select Jeans Brand"}, {class: "selectpicker"}
+        %p ◆ Select jeans brand.
+        = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: ""}, {class: "selectpicker"}
       .form-group
-        = f.collection_select :lot_id, Lot.all, :id, :number, {prompt: "Select Jeans Lots"}, {class: "selectpicker"}
+        %p ◆ Select jeans lot.
+        = f.collection_select :lot_id, Lot.all, :id, :number, {prompt: ""}, {class: "selectpicker"}
       .form-group
-        %p When did you purchase?
+        %p ◆ When did you purchase?
         = f.date_field :date_of_purchase, {class: "form-control text-gray"}
         = f.hidden_field :user_id, value: current_user.id
+      .form-group
+        %p ◆ How many times did you rinse your jeans?
+        = f.select :number_of_laundry, options_for_select((1..500).to_a), {prompt: "Select number"}, {class: "selectpicker"}
       = f.submit  class: "btn btn-primary"
+      .form-group
+
+    %div.col-6
+      %div.
