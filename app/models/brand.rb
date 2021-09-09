@@ -1,3 +1,3 @@
 class Brand < ApplicationRecord
-  has_many :jeans
+  has_many :lots
 end

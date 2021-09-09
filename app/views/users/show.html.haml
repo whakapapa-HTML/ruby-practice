@@ -28,4 +28,13 @@
       .form-group
 
     %div.col-6
-      %div.
+      %h3
+        Your Jeans
+      - @jeans.each do |j|
+        %ul.text-center.list-unstyled
+          %li
+            = link_to jeans_path(j) do
+              = image_tag j.jeans_image.url, size: "200x230"
+            = j.brand.name
+            = j.lot.number if j.lot_id.present?
+

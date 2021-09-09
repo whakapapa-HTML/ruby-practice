@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_07_125759) do
+ActiveRecord::Schema.define(version: 2021_09_09_063136) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 2021_09_07_125759) do
   create_table "jeans", force: :cascade do |t|
     t.integer "user_id"
     t.integer "brand_id"
-    t.integer "lot_id"
     t.integer "number_of_laundry"
     t.date "date_of_purchase"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "jeans_image"
+    t.integer "lot_id"
   end
 
   create_table "lots", force: :cascade do |t|

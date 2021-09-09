@@ -1,3 +1,3 @@
 class Lot < ApplicationRecord
-  has_many :jeans
+  belongs_to :brand
 end
