@@ -16,7 +16,10 @@
         = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: ""}, {class: "selectpicker"}
       .form-group
         %p ◆ Select jeans lot.
-        = f.collection_select :lot_id, Lot.all, :id, :number, {prompt: ""}, {class: "selectpicker"}
+        = f.select :lot_id, [], {prompt: ""}, {class: "selectpicker default-sub-category-select"}
+        - Brand.all.each do |brand|
+          %template{id: "lot-of-brand#{brand.id}"}
+            = f.collection_select :lot_id, brand.lots, :id, :number, {prompt: ""}, {class: "selectpicker"}
       .form-group
         %p ◆ When did you purchase?
         = f.date_field :date_of_purchase, {class: "form-control text-gray"}

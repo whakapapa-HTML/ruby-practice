@@ -5,10 +5,7 @@ class JeansController < ApplicationController
 
   def create
     @jean = Jeans.new(jeans_params)
-    if @jean.save
-    else
-      render "users/show"
-    end
+    @jean.save
   end
 
   private
