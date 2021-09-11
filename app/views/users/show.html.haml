@@ -28,7 +28,6 @@
         %p ◆ How many times did you rinse your jeans?
         = f.select :number_of_laundry, options_for_select((1..500).to_a), {prompt: "Select number"}, {class: "selectpicker"}
       = f.submit  class: "btn btn-primary"
-      .form-group
 
     %div.col-6
       %h3
@@ -40,4 +39,6 @@
               = image_tag j.jeans_image.url, size: "200x230"
             = j.brand.name
             = j.lot.number if j.lot_id.present?
+            = j.lot.date_of_birth
+
 

@@ -36,34 +36,33 @@
   });
 
 
-
 $(document).on('turbolinks:load', function() {
-     //HTMLが読み込まれた時の処理
-     let categoryVal = $('#jeans_brand_id').val();
-     //一度目に検索した内容がセレクトボックスに残っている時用のif文
-     if (categoryVal !== "") {
-      let selectedTemplate = $(`#lot-of-brand${categoryVal}`);
-      $('#jeans_lot_id').remove();
-      $('#jeans_brand_id').after(selectedTemplate.html());
-     };
+ //HTMLが読み込まれた時の処理
+ let categoryVal = $('#jeans_brand').val();
+ //一度目に検索した内容がセレクトボックスに残っている時用のif文
+ if (categoryVal !== "") {
+  let selectedTemplate = $(`#sub-category-of-category${categoryVal}`);
+  $('#jeans_lot').remove();
+  $('#jeans_brand').after(selectedTemplate.html());
+ };
 
-     //先ほどビューファイルに追加したもともとある子要素用のセレクトボックスのHTML
-     let defaultSubCategorySelect = `<select name="sub_category" id="sub_category">
-    <option value>サブカテゴリーを選択してください</option>
-    </select>`;
+ //先ほどビューファイルに追加したもともとある子要素用のセレクトボックスのHTML
+ let defaultSubCategorySelect = `<select name="sub_category" id="sub_category">
+<option value>サブカテゴリーを選択してください</option>
+</select>`;
 
-     $(document).on('change', '#jeans_brand_id', function() {
-      let categoryVal = $('#jeans_brand_id').val();
-      //親要素のセレクトボックスが変更されてvalueに値が入った場合の処理
-      if (categoryVal !== "") {
-       let selectedTemplate = $(`#lot-of-brand${categoryVal}`);
-       //デフォルトで入っていた子要素のセレクトボックスを削除
-       $('#jeans_lot_id').remove();
-       $('#jeans_brand_id').after(selectedTemplate.html());
-      }else {
-       //親要素のセレクトボックスが変更されてvalueに値が入っていない場合（include_blankの部分を選択している場合）
-       $('#jeans_lot_id').remove();
-       $('#jeans_brand_id').after(defaultSubCategorySelect);
-      };
-     });
-    });
+ $(document).on('change', '#jeans_brand', function() {
+  let categoryVal = $('#jeans_brand').val();
+  //親要素のセレクトボックスが変更されてvalueに値が入った場合の処理
+  if (categoryVal !== "") {
+   let selectedTemplate = $(`#sub-category-of-category${categoryVal}`);
+   //デフォルトで入っていた子要素のセレクトボックスを削除
+   $('#jeans_lot').remove();
+   $('#jeans_brand').after(selectedTemplate.html());
+  }else {
+   //親要素のセレクトボックスが変更されてvalueに値が入っていない場合（include_blankの部分を選択している場合）
+   $('#jeans_lot').remove();
+   $('#jeans_brand').after(defaultSubCategorySelect);
+  };
+ });
+});

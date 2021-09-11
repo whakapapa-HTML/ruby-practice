@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     resources :lots, only: :index
   end
   resources :posts
-  resources :jeans
+  resources :jeans do
+    collection do
+      get 'search'
+    end
+  end
   resources :nominee_maps, only: [:create, :destroy]
   resources :nominees do
     get 'posts', to: 'posts#search'
