@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
   def show
-    @new_jeans = Jeans.new
-    @jeans = current_user.jeans
-    @user_jeans = Jeans.new
-    
+    @jeans = Jeans.new
+    @user_jeans = current_user.jeans
   end
+
+
 
 end

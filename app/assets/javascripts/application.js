@@ -9,12 +9,11 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//= require jquery3
 //= require popper
+//= require jquery
+//= require rails-ujs
 //= require bootstrap-sprockets
 //
-//= require rails-ujs
-//= require bootstrap-select
 //= require activestorage
 //= require_tree .
 
@@ -35,34 +34,46 @@
     });
   });
 
+  $(document).ready(function() {
+    $("p").text("jQuery稼働テスト(稼働中)");
+  });
 
-$(document).on('turbolinks:load', function() {
- //HTMLが読み込まれた時の処理
- let categoryVal = $('#jeans_brand').val();
- //一度目に検索した内容がセレクトボックスに残っている時用のif文
- if (categoryVal !== "") {
-  let selectedTemplate = $(`#sub-category-of-category${categoryVal}`);
-  $('#jeans_lot').remove();
-  $('#jeans_brand').after(selectedTemplate.html());
- };
 
- //先ほどビューファイルに追加したもともとある子要素用のセレクトボックスのHTML
- let defaultSubCategorySelect = `<select name="sub_category" id="sub_category">
-<option value>サブカテゴリーを選択してください</option>
-</select>`;
 
- $(document).on('change', '#jeans_brand', function() {
-  let categoryVal = $('#jeans_brand').val();
-  //親要素のセレクトボックスが変更されてvalueに値が入った場合の処理
-  if (categoryVal !== "") {
-   let selectedTemplate = $(`#sub-category-of-category${categoryVal}`);
-   //デフォルトで入っていた子要素のセレクトボックスを削除
-   $('#jeans_lot').remove();
-   $('#jeans_brand').after(selectedTemplate.html());
-  }else {
-   //親要素のセレクトボックスが変更されてvalueに値が入っていない場合（include_blankの部分を選択している場合）
-   $('#jeans_lot').remove();
-   $('#jeans_brand').after(defaultSubCategorySelect);
-  };
- });
-});
+
+
+
+    $(document).ready(function() {
+//復活させるダミーの中カテゴリのセレクトボックス
+      let defaultMediumCategorySelect = `<div id="medium_category">
+                                           <div class="form-group">
+                                             <label for="jeans_lot_id">Lot</label>
+                                             <select class="form-control" name="jeans[lot_id]" id="jeans_lot_id">
+                                               <option value="">---</option>
+                                             </select>
+                                           </div>
+                                         </div>`;
+
+
+    //中カテゴリの処理
+     $(document).on('change', '#jeans_brand_id', function() {
+      let categoryVal = $('#jeans_brand_id').val();
+
+      //大カテゴリが変更されてvalueに値が入った場合の処理
+      if (categoryVal !== "") {
+       let selectedTemplate = $(`#medium_category_${categoryVal}`); //呼び出すtamplateのidセット
+
+       $('#medium_category').remove(); //デフォルト表示用の中カテゴリを削除
+       $("#selected_medium_category").remove(); //前に選択した中カテゴリがある場合に削除
+       $('#medium_category_insert_point').after(selectedTemplate.html());　//大カテゴリに紐づいた中カテゴリセレクトを追加
+
+      } else {
+
+       //親要素のセレクトボックスが変更されてvalueに値が入っていない場合（include_blankの部分を選択している場合）
+       $("#selected_medium_category").remove();//前に選択した中カテゴリがある場合に削除
+       $('#medium_category').remove();//デフォルト表示用の中カテゴリを削除
+       $('#medium_category_insert_point').after(defaultMediumCategorySelect); //デフォルト表示の中カテゴリを追加
+      };
+     });
+
+    }); //$(document).on('turbolinks:load', function()
