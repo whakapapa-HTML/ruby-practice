@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_081217) do
+ActiveRecord::Schema.define(version: 2021_09_13_125727) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(version: 2021_09_13_081217) do
 
   create_table "lots", force: :cascade do |t|
     t.string "number"
+    t.integer "brand_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "brand_id"
   end
 
   create_table "nominee_maps", force: :cascade do |t|

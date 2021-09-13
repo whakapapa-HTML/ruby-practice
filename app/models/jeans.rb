@@ -1,6 +1,6 @@
 class Jeans < ApplicationRecord
-  belongs_to :lot
-  belongs_to :brand
+  belongs_to :lot, optional: true
+  belongs_to :brand, optional: true
   belongs_to :user
   has_many :posts
 

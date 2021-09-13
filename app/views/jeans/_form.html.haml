@@ -1,5 +1,5 @@
 .col-6
-  = bootstrap_form_for(jeans) do |f|
+  = bootstrap_form_with(model: jeans, url: user_jeans_index_path(current_user), local: true) do |f|
     .form_group
       -if jeans.jeans_image.url
         = image_tag jeans.jeans_image.url, id: :img_prev
@@ -39,6 +39,7 @@
         - brand.lots.each do |lot|
           %template{id: "small_category#{lot.id}"}
             #selected_small_category
+
               = f.collection_select :year_id, lot.years, :id, :date_of_birth, {include_blank: "---", prompt: false}
 
     .form-group
