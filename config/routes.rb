@@ -2,15 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'jeans#index'
-  resources :brands, only: :create do
-    resources :lots, only: :index
-  end
+  resources :brands, only: :create
   resources :posts
-  resources :jeans do
-    collection do
-      get 'search'
-    end
-  end
+  resources :jeans
   resources :nominee_maps, only: [:create, :destroy]
   resources :nominees do
     get 'posts', to: 'posts#search'
