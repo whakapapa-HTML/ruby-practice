@@ -11,4 +11,7 @@ class User < ApplicationRecord
 
   has_many :reverse_of_relationships, class_name: 'relationship', foreign_key: :follower_id
   has_many :followers, through: :reverse_of_relationships, source: :following
+
+  mount_uploader :image, ImageUploader
+
 end

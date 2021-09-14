@@ -1,8 +1,5 @@
 .container
   .row.mx-auto
-    %h1.col-12.mb-5 Register your jeans
-    = render "jeans/form", jeans: @jeans
-
     .col-6
       %h3
         Your Jeans
@@ -13,3 +10,7 @@
               = image_tag j.jeans_image.url, size: "200x230"
             = j.brand.name
             = j.lot.number if j.lot_id.present?
+    .col-6
+      %h3.mb-5 Register your jeans
+      = render "jeans/form", jeans: @jeans
+
