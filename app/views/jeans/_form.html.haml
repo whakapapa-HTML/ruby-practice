@@ -1,52 +1,51 @@
 
-  = bootstrap_form_with(model: jeans, url: user_jeans_index_path(current_user), local: true) do |f|
-    .form_group
-      -if jeans.jeans_image.url
-        = image_tag jeans.jeans_image.url, id: :img_prev
+= bootstrap_form_with(model:[current_user, jeans], local: true)do |f|
+  .form_group
+    -if jeans.jeans_image.url
+      = image_tag jeans.jeans_image.url, id: :img_prev, size: "200x230", class: "shadow-lg p-3 mb-5 bg-white rounded"
+    -else
+      = image_tag 'no_jeans.jpg', id: :img_prev, size: "200x230", class: "shadow-lg p-3 mb-5 bg-white rounded"
+  .file_form_group
+    = f.file_field :jeans_image, {class: "file_field_message", id: "user_img"}
+  .form-group
+    = f.collection_select :brand_id, Brand.all, :id, :name, {include_blank: "Select jeans brand", prompt: false}
+  .form-group
+    // 中カテゴリが差し込ませるポイントを指定するために追加
+    #medium_category_insert_point
+    // EDIT時、中カテゴリーのダミー表示の切替
+    #medium_category
+      - if jeans.lot_id.blank?
+        = f.select :lot_id, [], include_blank: "---"
       -else
-        = image_tag 'no_jeans.jpg', id: :img_prev, size: "200x230"
-    .file_form_group
-      = f.file_field :jeans_image, {class: "file_field_message", id: "user_img"}
-    .form-group
-      = f.collection_select :brand_id, Brand.all, :id, :name, {include_blank: "Select jeans brand", prompt: false}
-    .form-group
-      // 中カテゴリが差し込ませるポイントを指定するために追加
-      #medium_category_insert_point
-      // EDIT時、中カテゴリーのダミー表示の切替
-      #medium_category
-        - if jeans.lot_id.blank?
-          = f.select :lot_id, [], include_blank: "---"
-        -else
-          = f.collection_select :lot_id, jeans.brand.lots, :id, :number, {include_blank: "---", prompt: false }
-      // 小カテゴリが差し込ませるポイントを指定するために追加
-      #small_category_insert_point
+        = f.collection_select :lot_id, jeans.brand.lots, :id, :number, {include_blank: "---", prompt: false }
+    // 小カテゴリが差し込ませるポイントを指定するために追加
+    #small_category_insert_point
 
-      // EDIT時、小カテゴリのダミー表示の切替
-      #small_category
-        - if jeans.year_id.blank?
-          = f.select :year_id, [], include_blank: "---"
-        - else
-          = f.collection_select :year_id, jeans.brand.lot.years, :id, :date_of_birth, {include_blank: "---", prompt: false }
-          = binding.pry
-      // 中カテゴリのtamplateを作成
-      - Brand.all.each do |brand|
-        // このidをもとに呼び出される(コメントもインデント揃える)
-        %template{id: "medium_category#{brand.id}"}
-          #selected_medium_category
-            = f.collection_select :lot_id, brand.lots, :id, :number, {include_blank: "---", prompt: false}
+    // EDIT時、小カテゴリのダミー表示の切替
+    #small_category
+      - if jeans.year_id.blank?
+        = f.select :year_id, [], include_blank: "---"
+      - else
+        = f.collection_select :year_id, jeans.lot.years, :id, :date_of_birth, {include_blank: "---", prompt: false }
+    // 中カテゴリのtamplateを作成
+    - Brand.all.each do |brand|
+      // このidをもとに呼び出される(コメントもインデント揃える)
+      %template{id: "medium_category#{brand.id}"}
+        #selected_medium_category
+          = f.collection_select :lot_id, brand.lots, :id, :number, {include_blank: "---", prompt: false}
 
-        // 中カテゴリのtamplate作成途中に、小カテゴリのtamplateを作成を挟む
-        - brand.lots.each do |lot|
-          %template{id: "small_category#{lot.id}"}
-            #selected_small_category
+      // 中カテゴリのtamplate作成途中に、小カテゴリのtamplateを作成を挟む
+      - brand.lots.each do |lot|
+        %template{id: "small_category#{lot.id}"}
+          #selected_small_category
 
-              = f.collection_select :year_id, lot.years, :id, :date_of_birth, {include_blank: "---", prompt: false}
+            = f.collection_select :year_id, lot.years, :id, :date_of_birth, {include_blank: "---", prompt: false}
 
-    .form-group
-      %p ◆ When did you purchase?
-      = f.date_field :date_of_purchase, {class: "form-control text-gray"}
-      = f.hidden_field :user_id, value: current_user.id
-    .form-group
-      %p ◆ How many times did you rinse your jeans?
-      = f.select :number_of_laundry, options_for_select((1..500).to_a), {prompt: "Select number"}, {class: "selectpicker"}
-      = f.submit  class: "btn btn-primary"
+  .form-group
+    %p ◆ When did you purchase?
+    = f.date_field :date_of_purchase, {class: "form-control text-gray"}
+    = f.hidden_field :user_id, value: current_user.id
+  .form-group
+    %p ◆ How many times did you rinse your jeans?
+    = f.select :number_of_laundry, options_for_select((0..500).to_a), {prompt: "Select number"}, {class: "selectpicker"}
+    = f.submit  class: "btn btn-primary"

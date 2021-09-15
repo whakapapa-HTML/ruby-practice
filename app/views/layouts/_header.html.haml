@@ -2,7 +2,9 @@
   %header
     %nav.navbar.navbar-expand-lg.navbar-light.p-4
       .flex-column
-        %h1 Jeans
+        = link_to posts_path, class: "text-dark text-decoration-none" do
+          %h1
+            Jeans
         %small.ml-2 post your jeans
       %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
       #navbarNavDropdown.collapse.navbar-collapse

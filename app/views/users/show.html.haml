@@ -6,9 +6,9 @@
       .flex-column
         .ml_auto.mb-2
           -if current_user.image.url
-            = image_tag current_user.image.url, size: "90x90", class: "rounded-circle"
+            = image_tag current_user.image.url, size: "300x300", class: "shadow mb-5 bg-white rounded-circle"
           -else
-            = image_tag 'no_jeans.jpg', size: "90x90", class: "rounded-circle"
+            = image_tag 'no_jeans.jpg', size: "90x90", class: "shadow mb-5 bg-white rounded-circle"
         .ml_auto.font-weight-bold.mb-1
           = current_user.name
         .ml-auto
@@ -21,9 +21,9 @@
         Edit Your Profile
       = bootstrap_form_with(model: current_user, url: user_path(current_user), local: true) do |f|
         -if current_user.image.url
-          = image_tag current_user.image.url, size: "200x200", id: :img_prev, class: "rounded-circle"
+          = image_tag current_user.image.url, size: "200x200", id: :img_prev, class: "shadow mb-5 bg-white rounded-circle"
         -else
-          = image_tag 'no_jeans.jpg', id: :img_prev, size: "200x230", class: "rounded-circle"
+          = image_tag 'no_jeans.jpg', id: :img_prev, size: "200x230", class: "shadow mb-5 bg-white rounded-circle"
         = f.file_field :image, {class: "file_field_message", id: "user_img"}
         = f.text_field :name
         = f.text_area :introduction

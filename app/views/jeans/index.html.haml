@@ -1,16 +1,30 @@
 .container
   .row.mx-auto
     .col-6
-      %h3
+      %h3.mb-5
         Your Jeans
       - @user_jeans.each do |j|
-        %ul.text-center.list-unstyled
-          %li
+        %ul.list-unstyled
+          %li.d-flex
             = link_to user_jeans_path(j,user_id: current_user) do
-              = image_tag j.jeans_image.url, size: "200x230"
-            = j.brand.name
-            = j.lot.number if j.lot_id.present?
-    .col-6
+              = image_tag j.jeans_image.url, size: "200x230", class: "ml-auto shadow-lg mb-5 bg-white rounded"
+            .flex-column.p-4
+              .font-weight-bold.mb-3
+                = j.brand.name
+                = j.lot.number if j.lot_id.present?
+                = j.year.date_of_birth if j.year_id.present?
+              - date =  (@today - j.date_of_purchase).to_i
+              .small
+                ・You have been wearing this for
+                %span.font-weight-bold
+                  #{date}
+                days!
+              .small
+                ・You washed this
+                %span.font-weight-bold
+                  #{j.number_of_laundry}
+                times!
+    .col-5
       %h3.mb-5 Register your jeans
       = render "jeans/form", jeans: @jeans
 

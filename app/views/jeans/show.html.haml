@@ -1,0 +1,23 @@
+.container
+  .row.mx-auto
+    .col-6
+      = image_tag @jeans.jeans_image.url, size: "400x430", class: "shadow-lg p-3 mb-5 bg-white rounded"
+      .flex-column.font-weight-bold.mb-3.mt-3
+        = @jeans.brand.name
+        = @jeans.lot.number if @jeans.lot_id.present?
+        = @jeans.year.date_of_birth if @jeans.year_id.present?
+      - date =  (@today - @jeans.date_of_purchase).to_i
+      .small
+        ・You have been wearing this for
+        %span.font-weight-bold
+          #{date}
+        days!
+      .small
+        ・You washed this
+        %span.font-weight-bold
+          #{@jeans.number_of_laundry}
+        times!
+
+    .col-5
+      %h3.mb-5 Edit your jeans
+      = render "jeans/form", jeans: @jeans
