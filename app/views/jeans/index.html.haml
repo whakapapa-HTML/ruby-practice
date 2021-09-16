@@ -6,7 +6,7 @@
       - @user_jeans.each do |j|
         %ul.list-unstyled
           %li.d-flex
-            = link_to user_jeans_path(j,user_id: current_user) do
+            = link_to my_jeans_path(j) do
               = image_tag j.jeans_image.url, size: "200x230", class: "ml-auto shadow-lg mb-5 bg-white rounded"
             .flex-column.p-4
               .font-weight-bold.mb-3

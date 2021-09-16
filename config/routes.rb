@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   end
   get 'my_page' => 'users#show'
   get 'my_page/edit' => 'users#edit'
+  get 'my_page/jeans' => 'jeans#index'
+  get 'my_page/jeans/:id' => 'jeans#show', as: 'my_jeans'
   resources :tags do
     get 'posts', to: 'posts#search'
   end

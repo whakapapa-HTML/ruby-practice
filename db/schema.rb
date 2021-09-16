@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_125727) do
+ActiveRecord::Schema.define(version: 2021_09_15_125456) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -53,12 +53,12 @@ ActiveRecord::Schema.define(version: 2021_09_13_125727) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "denim_id"
     t.integer "user_id"
     t.text "body"
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "jeans_id"
   end
 
   create_table "relationships", force: :cascade do |t|
