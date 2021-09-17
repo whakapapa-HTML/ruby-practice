@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'posts#index'
   resources :brands, only: :create
   resources :posts
+  get 'others' => 'posts#others'
   resources :nominee_maps, only: [:create, :destroy]
   resources :nominees do
     get 'posts', to: 'posts#search'
