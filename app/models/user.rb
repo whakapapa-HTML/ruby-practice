@@ -14,4 +14,10 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+
+  def jeans_name_and_number_and_date_of_birth
+    self.name + '(' + self.id.to_s + ')'
+  end
+
+
 end

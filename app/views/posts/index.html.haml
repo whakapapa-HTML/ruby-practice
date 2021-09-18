@@ -2,6 +2,15 @@
   .row
     = render 'layouts/sidebar'
     .col-4
+      %h3
+        Post Your Jeans
+      = bootstrap_form_with(url: posts_path, model: Post.new, local: true) do |f|
+        .form_group
+          = f.file_field :image, {class: "file_field_message", id: "user_img"}
+        .form-group
+          = f.text_area :body
+        .form_group
+          = f.select :jeans_id, @user_jeans.collect { |j| [j.brand.name + j.lot.number, j.id ] }, include_blank: true
       %h3.text-gray
         Your Posts
       - @posts.each do |post|
