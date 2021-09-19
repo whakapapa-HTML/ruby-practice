@@ -6,9 +6,8 @@ class PostsController < ApplicationController
 
   def index
     @user_jeans = current_user.jeans
-    @posts = current_user.posts
+    @posts = current_user.posts.order(created_at: :desc)
     @tag_list = Tag.all
-
   end
 
   def show

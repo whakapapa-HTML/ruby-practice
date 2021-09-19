@@ -16,9 +16,48 @@
  *= require_self
  */
 @import "bootstrap";
-@import "font-awesome";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
 
 .file_field_message {
   display: none;
 }
 
+.card-image {
+   width : 100%;
+   height: 45vh;
+   background-color: lightgray;
+}
+
+img {
+   object-fit: contain;
+}
+
+.rounded-pill:hover {
+    border-color: #008BBB;
+}
+
+.icons {
+    font-size: 130%;
+}
+
+.fa-edit {
+    color: #CCCCCC;
+}
+
+.edit-icon:hover {
+
+     color: #008BBB;
+}
+
+.fa-heart:hover {
+     color: #008BBB;
+}
+
+.fa-share-square:hover {
+     color: #008BBB;
+}
+
+.fa-comment:hover {
+     color: #008BBB;
+}
