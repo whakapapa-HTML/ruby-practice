@@ -9,7 +9,9 @@
             = link_to my_jeans_path(j) do
               = image_tag j.jeans_image.url, size: "200x230", class: "ml-auto shadow-lg mb-5 bg-white rounded"
             .flex-column.p-4
-              .font-weight-bold.mb-3
+              %strong
+                = j.name
+              .mb-3
                 = j.brand.name
                 = j.lot.number if j.lot_id.present?
                 = j.year.date_of_birth if j.year_id.present?

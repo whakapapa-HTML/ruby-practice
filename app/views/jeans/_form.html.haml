@@ -5,6 +5,8 @@
       = image_tag jeans.jeans_image.url, id: :img_prev, size: "200x230", class: "shadow-lg p-3 mb-5 bg-white rounded"
     -else
       = image_tag 'no_jeans.jpg', id: :img_prev, size: "200x230", class: "shadow-lg p-3 mb-5 bg-white rounded"
+  .form_group
+    = f.text_field :name, :placeholder => "Give your jeans specify name"
   .file_form_group
     = f.file_field :jeans_image, {class: "file_field_message", id: "user_img"}
   .form-group
@@ -32,14 +34,14 @@
       // このidをもとに呼び出される(コメントもインデント揃える)
       %template{id: "medium_category#{brand.id}"}
         #selected_medium_category
-          = f.collection_select :lot_id, brand.lots, :id, :number, {include_blank: "---", prompt: false}
+          = f.collection_select :lot_id, brand.lots, :id, :number, {include_blank: "Select Jeans Lot", prompt: false}
 
       // 中カテゴリのtamplate作成途中に、小カテゴリのtamplateを作成を挟む
       - brand.lots.each do |lot|
         %template{id: "small_category#{lot.id}"}
           #selected_small_category
 
-            = f.collection_select :year_id, lot.years, :id, :date_of_birth, {include_blank: "---", prompt: false}
+            = f.collection_select :year_id, lot.years, :id, :date_of_birth, {include_blank: "Select Jeans Model", prompt: false}
 
   .form-group
     %p ◆ When did you purchase?

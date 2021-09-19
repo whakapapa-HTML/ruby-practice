@@ -5,7 +5,5 @@ class Jeans < ApplicationRecord
   belongs_to :user
   has_many :posts
 
-  validates :year, presence: true, if: :year_id?
-
   mount_uploader :jeans_image, JeansUploader
 end

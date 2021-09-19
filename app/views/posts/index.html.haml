@@ -1,25 +1,36 @@
 .container-fluid
   .row
     = render 'layouts/sidebar'
-    .col-4
-      %h3
-        Post Your Jeans
+    .col-4.mx-auto
+      %strong
+        .mb-4
+          Post Your Jeans
       = bootstrap_form_with(url: posts_path, model: Post.new, local: true) do |f|
         .form_group
           = f.file_field :image, {class: "file_field_message", id: "user_img"}
         .form-group
           = f.text_area :body
         .form_group
-          = f.select :jeans_id, @user_jeans.collect { |j| [j.brand.name + j.lot.number, j.id ] }, include_blank: true
-      %h3.text-gray
-        Your Posts
+          = f.select :jeans_id, @user_jeans.collect { |j| [j.name + j.brand.name + j.lot.number, j.id]}, include_blank: true
+          - @tag_list.each do |list|
+            %span
+              = link_to list.tag_name, tag_posts_path(tag_id: list.id)
+              = "(#{list.posts.count})"
+          = f.text_field :tag_name
+          = f.submit
+      %strong
+        .mt-4
+          Your Posts
       - @posts.each do |post|
         .card
-          %svg.bd-placeholder-img.card-img-top.100.180
-            = image_tag post.image.url,  size: "200x230"
+          %svg.bd-placeholder-img.card-img-top
+            = image_tag post.image.url, width: '100%', height: '80%'
           .card-body
-            %h5.card-title
-              Card title
+            - post_jeans = Jeans.find_by(id: post.jeans_id)
+            %strong
+              #{post_jeans.name}
+            %small
+              (#{post_jeans.brand.name} #{post_jeans.lot.number} #{post_jeans.year.date_of_birth})
             %p.card-text
-              Some quick example text to build on the card title and make up the bulk of the card's content.
-
+              = post.body
+    .col-3
