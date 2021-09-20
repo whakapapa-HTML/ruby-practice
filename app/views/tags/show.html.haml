@@ -2,22 +2,14 @@
   .row
     = render 'layouts/sidebar'
     .col-4.mx-auto
+      .d-flex
+        Tag:
+        %strong.ml-3
+          .mb-4
+            = @tag.tag_name
+            (#{@tag.posts.count})
       %strong
-        .mb-4
-          Post Your Jeans
-      = bootstrap_form_with(url: posts_path, model: Post.new, local: true) do |f|
-        .form_group
-          = f.file_field :image, {class: "file_field_message", id: "user_img"}
-        .form-group
-          = f.text_area :body
-        .form_group
-          = f.select :jeans_id, @user_jeans.collect { |j| [j.name + j.brand.name + j.lot.number, j.id]}
-          = f.text_field :tag_name, :placeholder => "Insert space when you add a hushtag yo your post!!"
-          = f.submit
-      %strong
-        .mt-4
-          View Posts
-      - @posts.each do |post|
+      - @tag.posts.each do |post|
         .card.mb-4
           .bd-placeholder-img.card-img-top
             = image_tag post.image.url, class: "card-image"

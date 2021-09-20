@@ -1,15 +1,10 @@
 .container-fluid
   .row
     = render 'layouts/sidebar'
-    .col-4
-      %h3.text-gray
-        Your Posts
-      - @posts.each do |post|
-        .card
-          %svg.bd-placeholder-img.card-img-top.100.180
-            = image_tag post.image.url,  size: "200x230"
-          .card-body
-            %h5.card-title
-              Card title
-            %p.card-text
-              Some quick example text to build on the card title and make up the bulk of the card's content.
+    .col-9.flex-wrap
+      .other-jeans-images
+        - @posts.each do |post|
+          = link_to post_path(post) do
+            = image_tag post.image.url, class: "other-jeans-image"
+
+
