@@ -2,12 +2,12 @@
   .row
     = render 'layouts/sidebar'
     .col-4.mx-auto
-      .d-flex
-        Tag:
-        %strong.ml-3
-          .mb-4
-            = @tag.tag_name
-            (#{@tag.posts.count})
+      .d-flex.mb-3
+        %h4
+          Tag:
+        %strong.ml-3.d-flex.align-items-center
+          = @tag.tag_name
+          (#{@tag.posts.count})
       %strong
       - @tag.posts.each do |post|
         .card.mb-4

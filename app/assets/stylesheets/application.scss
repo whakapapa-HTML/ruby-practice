@@ -19,6 +19,10 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+.link {
+  color: black;
+}
+
 .file_field_message {
   display: none;
 }
@@ -60,6 +64,7 @@
 }
 
 .other-jeans-image {
+     width: 250px;
      height: 45vh;
      object-fit: contain;
 }

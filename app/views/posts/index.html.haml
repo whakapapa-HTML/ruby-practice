@@ -12,6 +12,9 @@
           = f.text_area :body
         .form_group
           = f.select :jeans_id, @user_jeans.collect { |j| [j.name + j.brand.name + j.lot.number, j.id]}
+          %p.text-right
+            = link_to my_page_jeans_path, class: "link text-decoration-none" do
+              Add New Jeans ->
           = f.text_field :tag_name, :placeholder => "Insert space when you add a hushtag yo your post!!"
           = f.submit
       %strong

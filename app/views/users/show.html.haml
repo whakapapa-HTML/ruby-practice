@@ -1,30 +1,41 @@
-.container
-  .row.mx-auto
-    .col-6
+.container-fluid
+  .row
+    = render 'layouts/sidebar'
+    .col-4.mx-auto
       %h2.mb-5
-        Your Profile
-      .flex-column
+        User Profile
+      .d-flex
         .ml_auto.mb-2
-          -if current_user.image.url
-            = image_tag current_user.image.url, size: "300x300", class: "shadow mb-5 bg-white rounded-circle"
+          -if @user.image.url
+            = image_tag @user.image.url, size: "70x70", class: "shadow mb-5 bg-white rounded-circle"
           -else
-            = image_tag 'no_jeans.jpg', size: "90x90", class: "shadow mb-5 bg-white rounded-circle"
-        .ml_auto.font-weight-bold.mb-1
-          = current_user.name
-        .ml-auto
-          = current_user.introduction
-        .d-flex
-          = link_to my_page_jeans_path do
-            %strong view your jeans
-    .col-6
-      %h2
-        Edit Your Profile
-      = bootstrap_form_with(model: current_user, url: user_path(current_user), local: true) do |f|
-        -if current_user.image.url
-          = image_tag current_user.image.url, size: "200x200", id: :img_prev, class: "shadow mb-5 bg-white rounded-circle"
-        -else
-          = image_tag 'no_jeans.jpg', id: :img_prev, size: "200x230", class: "shadow mb-5 bg-white rounded-circle"
-        = f.file_field :image, {class: "file_field_message", id: "user_img"}
-        = f.text_field :name
-        = f.text_area :introduction
-        = f.submit
+            = image_tag 'no_jeans.jpg', size: "70x70", class: "shadow mb-5 bg-white rounded-circle"
+        .flex-column.ml-4
+          .ml_auto.font-weight-bold.mb-1
+            = @user.name
+          .ml-auto
+            = @user.introduction
+          .d-flex
+            %p
+              Posts
+              %strong
+                = @user.posts.count
+              | Follower
+              %strong
+                = @user.followers.count
+              | Following
+              %strong
+                = @user.followings.count
+          .d-flex.icons
+            - if @user != current_user
+              - if @user.is_followed_by?(current_user)
+                = link_to user_relationships_path(user_id: @user.id), method: :delete do
+                  %i.fas.fa-user
+              - else
+                = link_to user_relationships_path(user_id: @user.id), method: :post do
+                  %i.far.fa-user
+          .d-flex
+            -if @user == current_user
+              = link_to my_page_jeans_path do
+                %strong view your jeans
+    .col-3

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get :followings, on: :member
     get :followers, on: :member
   end
-  get 'my_page' => 'users#show'
+  get 'my_page' => 'users#my_page'
   get 'my_page/edit' => 'users#edit'
   get 'my_page/jeans' => 'jeans#index'
   get 'my_page/jeans/:id' => 'jeans#show', as: 'my_jeans'

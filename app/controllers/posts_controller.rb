@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: [:others]
 
   def others
     @posts = Post.all
@@ -6,9 +7,11 @@ class PostsController < ApplicationController
 
   def index
     @user_jeans = current_user.jeans
+    @users = User.where.not(id: current_user.id)
     @posts = current_user.posts.order(created_at: :desc)
     @tag_list = Tag.all
   end
+
 
   def show
     @post = Post.find(params[:id])

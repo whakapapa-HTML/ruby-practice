@@ -13,7 +13,7 @@
             %li.nav-item
               = link_to 'mypage', my_page_path, class: 'nav-link text-dark'
             %li.nav-item
-              = link_to "post", posts_path, method: :post, class: 'nav-link text-dark'
+              = link_to "post", posts_path, class: 'nav-link text-dark'
             %li.nav-item
               = link_to "logout", destroy_user_session_path, method: :delete, class: 'nav-link text-dark'
           - else
