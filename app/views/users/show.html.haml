@@ -30,12 +30,17 @@
             - if @user != current_user
               - if @user.is_followed_by?(current_user)
                 = link_to user_relationships_path(user_id: @user.id), method: :delete do
-                  %i.fas.fa-user
+                  %button.btn.btn-danger
+                    Unfollow #{@user.name}
               - else
                 = link_to user_relationships_path(user_id: @user.id), method: :post do
-                  %i.far.fa-user
+                  %button.btn.btn-primary
+                    Follow #{@user.name}
           .d-flex
             -if @user == current_user
               = link_to my_page_jeans_path do
                 %strong view your jeans
+      - @user.posts.each do |post|
+        = render 'posts/posts', post: post
+
     .col-3

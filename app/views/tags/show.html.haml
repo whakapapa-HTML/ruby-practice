@@ -10,30 +10,5 @@
           (#{@tag.posts.count})
       %strong
       - @tag.posts.each do |post|
-        .card.mb-4
-          .bd-placeholder-img.card-img-top
-            = image_tag post.image.url, class: "card-image"
-          .card-body
-            - post_jeans = Jeans.find_by(id: post.jeans_id)
-            %strong
-              = image_tag post_jeans.jeans_image.url, size: "50x50", class: "rounded-circle"
-              #{post_jeans.name}
-            %small
-              #{post_jeans.brand.name} #{post_jeans.lot.number} #{post_jeans.year.date_of_birth}
-            %p.card-text
-              = post.body
-            .d-flex
-              - post.tags.each do |tag|
-                %p.card.rounded-pill.p-2.mr-2.small
-                  = link_to tag_path(tag), class: "text-secondary text-decoration-none edit-icon" do
-                    = tag.tag_name
-            - if current_user
-              .d-flex.icons
-                = link_to edit_post_path(post), class: "far fa-edit text-secondary text-decoration-none edit-icon" do
-                  %i.mr-3
-                %i.far.fa-comment.mr-3
-                %i.far.fa-heart.mr-3
-                %i.far.fa-share-square.mr-3
-            %p.text-right.small
-              = post.created_at.strftime("%Y-%m-%d %H:%M")
+        = render 'posts/posts', post: post
     .col-3

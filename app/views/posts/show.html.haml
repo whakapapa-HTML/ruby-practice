@@ -29,4 +29,26 @@
               %i.far.fa-share-square.mr-3
           %p.text-right.small
             = @post.created_at.strftime("%Y-%m-%d %H:%M")
+        .p-3
+          %strong
+            Type your message here !!
+          = bootstrap_form_with url: post_comments_path(@post.id, @comment), local: true do |f|
+            = f.text_area :content, hide_label: true
+            .text-right
+              = f.submit
+
+        - if @comments.present?
+          %p
+            - @comments.each do |comment|
+              .flex-column.mt-3.p-3
+                = image_tag comment.user.image.url, size: "50x50", class: "rounded-circle"
+                %strong
+                  = comment.user.name
+                %small
+                  = comment.created_at.strftime("%Y-%m-%d %H:%M")
+                .p-3
+                  = comment.content
+        - else
+          %p.text-center
+            There's no message for this post yet.
     .col-3
