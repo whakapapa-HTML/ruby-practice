@@ -40,14 +40,37 @@
         - if @comments.present?
           %p
             - @comments.each do |comment|
-              .flex-column.mt-3.p-3
-                = image_tag comment.user.image.url, size: "50x50", class: "rounded-circle"
-                %strong
-                  = comment.user.name
-                %small
-                  = comment.created_at.strftime("%Y-%m-%d %H:%M")
-                .p-3
-                  = comment.content
+              - if comment.parent_id.nil?
+                .flex-column.mt-3.p-3{id:" parent_comment_#{comment.id}"}
+                  = image_tag comment.user.image.url, size: "50x50", class: "rounded-circle"
+                  %strong
+                    = comment.user.name
+                  %small
+                    = comment.created_at.strftime("%Y-%m-%d %H:%M")
+                  .ml-5
+                    = comment.content
+                  .text-right.mr-3.reply_button{id: "view_replies_#{comment.id}", onClick: "changeDisplay();"}
+                    View Replies
+                  %p.text-right.mr-3{id: "view_replies_#{comment.id}", onclick: "changeDisplay();"}
+                    Hide Replies
+                  - comment.replies.order(created_at: :desc).each do |reply|
+                    .mt-3.ml-5.p-3{id: "reply_area#{reply.id}"}
+                      = image_tag reply.user.image.url, size: "30x30", class: "rounded-circle"
+                      %strong
+                        = reply.user.name
+                      %small
+                        = reply.created_at.strftime("%Y-%m-%d %H:%M")
+                      .ml-5.mb-4
+                        = reply.content
+
+                  = bootstrap_form_with url: post_comments_path(@post.id, @comment_reply), local: true do |f|
+                    %strong
+                      Reply
+                    = f.text_area :content, hide_label: true
+                    = f.hidden_field :post_id, value: @post.id
+                    = f.hidden_field :parent_id, value: comment.id
+                    = f.submit
+
         - else
           %p.text-center
             There's no message for this post yet.

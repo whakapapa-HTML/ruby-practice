@@ -15,9 +15,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @post_tags = @post.tags
-    @comment = Comment.new
-    @comments = Comment.where(post_id: @post.id)
+    @comment = @post.comments.build  # 投稿全体へのコメント投稿用の変数
+    @comment_reply = @post.comments.build  # コメントに対する返信用の変数
+    @comments = Comment.includes(:user).where(post_id: @post.id).order(created_at: :desc)
   end
 
   def create

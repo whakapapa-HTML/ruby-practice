@@ -102,6 +102,8 @@
     }); //$(document).on('turbolinks:load', function()
 
 
-  $(document).ready(function(){
-   $('select[name=post[jeans_id]').ImageSelect({dropdownWidth:425});
-  });
+
+  function changeDisplay(){
+    let id = document.getElementById(`view_replies_${id}`);
+    console.log( id );
+  }
