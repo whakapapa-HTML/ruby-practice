@@ -103,7 +103,16 @@
 
 
 
-  function changeDisplay(){
-    let id = document.getElementById(`view_replies_${id}`);
-    console.log( id );
-  }
+        var elem2_1 = document.getElementById("#{reply.id}");
+        var elem2_2 = document.getElementById("view_#{comment.id}");
+        var elem2_3 = document.getElementById("hidden_#{comment.id}");
+        function toggle_view2() {
+          elem2_1.style.display = "";
+          elem2_2.style.display = "none";
+          elem2_3.style.display = "";
+        }
+        function toggle_hidden2() {
+          elem2_1.style.display = "none";
+          elem2_2.style.display = "";
+          elem2_3.style.display = "none";
+        }
