@@ -7,12 +7,14 @@
           = image_tag @post.image.url, class: "card-image"
         .card-body
           - post_jeans = Jeans.find_by(id: @post.jeans_id)
-          %strong
+          .d-flex
             = link_to user_path(@post.user) do
               = image_tag @post.user.image.url, size: "50x50", class: "rounded-circle"
-            #{post_jeans.name}
-          %small
-            #{post_jeans.brand.name} #{post_jeans.lot.number} #{post_jeans.year.date_of_birth}
+            .flex-column.ml-3
+              %strong
+                #{post_jeans.name}
+              %p.small
+                #{post_jeans.brand.name} #{post_jeans.lot.number} #{post_jeans.year.date_of_birth}
           %p.card-text
             = @post.body
           .d-flex
@@ -37,58 +39,60 @@
             .text-right
               = f.submit
 
+
         - if @comments.present?
-          %p
-            - @comments.each do |comment|
-              - if comment.parent_id.nil?
-                .flex-column.mt-3.p-3{id:" parent_comment_#{comment.id}"}
-                  = image_tag comment.user.image.url, size: "50x50", class: "rounded-circle"
-                  %strong
-                    = comment.user.name
-                  %small
-                    = comment.created_at.strftime("%Y-%m-%d %H:%M")
-                  %i.far.fa-comment-dots.mt-2.p-1{"data-toggle" => "modal", "data-target"=>"#exampleModal"}
-                  .ml-5
-                    = comment.content
+          - @comments.each do |comment|
+            - if comment.parent_id.nil?
+              .flex-column.mt-3.p-3{id:" parent_comment_#{comment.id}"}
+                = image_tag comment.user.image.url, size: "50x50", class: "rounded-circle"
+                %strong
+                  = comment.user.name
+                %small
+                  = comment.created_at.strftime("%Y-%m-%d %H:%M")
+                %i.reply_button.far.fa-comment-dots.mt-2.p-1{id: "reply-button-#{comment.id}"}
+                .ml-5
+                  = comment.content
+                %template{id: "reply-form-#{comment.id}"}
+                  = bootstrap_form_with url: post_comments_path(@post.id, @comment_reply), class: "mt-3 col-10", local: true do |f|
+                    %strong
+                      Reply
+                    = f.text_area :content, hide_label: true
+                    = f.hidden_field :post_id, value: @post.id
+                    = f.hidden_field :parent_id, value: comment.id
+                    = f.submit "Reply", class: "btn btn-primary"
+                - if comment.replies.present?
                   .text-right.mr-3{id: "view_#{comment.id}", onClick: "toggle_view2();return false;", style: "display:none;"}
                     View Replies
                   .text-right.mr-3{id: "hidden_#{comment.id}", onClick: "toggle_hidden2();return false;"}
                     Hide Replies
 
-                  - comment.replies.order(created_at: :desc).each do |reply|
-                    .mt-3.p-3{id: "#{reply.id}"}
-                      .text-left.ml-5
-                        = image_tag reply.user.image.url, size: "30x30", class: "rounded-circle"
-                        %strong
-                          = reply.user.name
-                        %small
-                          = reply.created_at.strftime("%Y-%m-%d %H:%M")
-                        .mb-4.ml-5
-                          = reply.content
-                  .modal.fade{id: "exampleModal", tabindex: "-1", role: "dialog", "aria-labelledby" => "exampleModalLabel", "aria-hidden" => "true"}
-                    .modal-dialog{role: "document"}
-                      .modal-content
-                        .modal-header
-                          %h5.modal-title{id: "exampleModalLabel"}
-                            Reply to @#{comment.user.name}
-                          %button{type: "button", class: "close", "data-dismiss" => "modal", "aria-label" => "Close"}
-                            %span{"aria-hidden" => "true"}
-                              &times;
-                        = bootstrap_form_with url: post_comments_path(@post.id, @comment_reply), local: true do |f|
-                          .modal-body
-                            %strong
-                              Reply
-                            = f.text_area :content, hide_label: true
-                            = f.hidden_field :post_id, value: @post.id
-                            = f.hidden_field :parent_id, value: comment.id
-                          .modal-footer
-                            %button{type: "button", class:"btn btn-secondary", "data-dismiss" => "modal"}
-                              Close
-                            = f.submit "Reply", class: "btn btn-primary"
+                - comment.replies.order(created_at: :desc).each do |reply|
+                  .mt-3.p-3
+                    .text-left.ml-5
+                      = image_tag reply.user.image.url, size: "30x30", class: "rounded-circle"
+                      %strong
+                        = reply.user.name
+                      %small
+                        = reply.created_at.strftime("%Y-%m-%d %H:%M")
+                      .mb-4.ml-5
+                        = reply.content
+
 
         - else
           %p.text-center
             There's no message for this post yet.
     .col-3
 
+
+
+:javascript
+    $(".reply_button").click(function(){
+        console.log($(this).attr('id'));
+        let text = $(this).attr('id');
+        let suffix = text.replace(/[^0-9]/g, '');
+        if (suffix !== "") {
+          let = $('#medium_category_insert_point').after(selectedTemplate.html());
+        }
+
+    });
 
