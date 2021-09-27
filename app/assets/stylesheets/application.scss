@@ -69,6 +69,11 @@
      object-fit: contain;
 }
 
-.reply_button {
+.reply_button:hover {
      cursor: pointer;
+}
+
+.view_replies_button:hover {
+     cursor: pointer;
+     text-decoration: underline;
 }

@@ -102,3 +102,33 @@
     }); //$(document).on('turbolinks:load', function()
 
 
+    // 返信フォームの処理
+
+    $(document).on('click', ".reply_button", function(){
+        let text = $(this).attr('id');
+        let suffix = text.replace(/[^0-9]/g, '');
+        if (suffix !== "") {
+          let selectedFrom = $(`#reply-form-${suffix}`)
+          let reply_form = $(`#reply_form_insert_point_${suffix}`).after(selectedFrom.html());
+          let reply_button = document.getElementById(text)
+          reply_button.style.visibility ="hidden";
+
+          $('.reply_close_button').click(function(){
+            reply_button.style.visibility ="visible";
+           });
+         }
+      });
+
+
+      // 返信表示・非表示
+      $(document).on('click', ".view_replies_button", function(){
+         let text = $(this).attr('id');
+         let suffix = text.replace(/[^0-9]/g, '');
+         if (suffix !== "") {
+           let reply_form = document.getElementById(`replies-${suffix}`);
+           let clone = reply_form.content.cloneNode(true);
+           document.getElementById(`replies_insert_point_${suffix}`).appendChild(clone);
+           console.log('できたよ')
+         }
+
+      });
