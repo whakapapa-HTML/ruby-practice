@@ -52,6 +52,7 @@
                 %i.reply_button.far.fa-comment-dots.mt-2.p-1{id: "reply-button-#{comment.id}"}
                 .ml-5
                   = comment.content
+                .div{id: "reply_form_insert_point_#{comment.id}"}
                 %template{id: "reply-form-#{comment.id}"}
                   = bootstrap_form_with url: post_comments_path(@post.id, @comment_reply), class: "mt-3 col-10", local: true do |f|
                     %strong
@@ -60,6 +61,7 @@
                     = f.hidden_field :post_id, value: @post.id
                     = f.hidden_field :parent_id, value: comment.id
                     = f.submit "Reply", class: "btn btn-primary"
+                    .btn.btn-light{ id: "#reply_close_button_#{comment.id}"}
                 - if comment.replies.present?
                   .text-right.mr-3{id: "view_#{comment.id}", onClick: "toggle_view2();return false;", style: "display:none;"}
                     View Replies
@@ -90,8 +92,15 @@
         console.log($(this).attr('id'));
         let text = $(this).attr('id');
         let suffix = text.replace(/[^0-9]/g, '');
+
         if (suffix !== "") {
-          let = $('#medium_category_insert_point').after(selectedTemplate.html());
+          let selectedFrom = $(`#reply-form-${suffix}`)
+          let reply_form = $(`#reply_form_insert_point_${suffix}`).after(selectedFrom.html());
+          if (reply_form = 1 ) {
+            let reply_button = document.getElementById(text)
+            reply_button.remove();
+
+          }
         }
 
     });
