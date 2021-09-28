@@ -66,8 +66,9 @@
                 - if comment.replies.present?
                   .view_replies_button.text-right.mr-3.text-primary{id: "view_#{comment.id}" }
                     View Replies
-                  .hide_replies_button.text-right.mr-3{id: "hidden_#{comment.id}", style: "display:none;"}
+                  .hide_replies_button.text-right.mr-3.text-primary{id: "hidden_#{comment.id}", style: "display:none;"}
                     Hide Replies
+
                   .div{id: "replies_insert_point_#{comment.id}"}
                   %template{id: "replies-#{comment.id}"}
                     - comment.replies.order(created_at: :desc).each do |reply|
@@ -80,6 +81,7 @@
                             = reply.created_at.strftime("%Y-%m-%d %H:%M")
                           .mb-4.ml-5
                             = reply.content
+
         - else
           %p.text-center
             There's no message for this post yet.

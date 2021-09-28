@@ -125,10 +125,17 @@
          let text = $(this).attr('id');
          let suffix = text.replace(/[^0-9]/g, '');
          if (suffix !== "") {
-           let reply_form = document.getElementById(`replies-${suffix}`);
-           let clone = reply_form.content.cloneNode(true);
-           document.getElementById(`replies_insert_point_${suffix}`).appendChild(clone);
-           console.log('できたよ')
-         }
+           let view_replies_button = document.getElementById(`view_${suffix}`)
+           let hide_replies_button = document.getElementById(`hidden_${suffix}`)
+           l
+           
+           view_replies_button.style.display = "none";
+           hide_replies_button.style.display = "";
+           $('.hide_replies_button').click(function(){
 
+             view_replies_button.style.display = "";
+             hide_replies_button.style.display = "none";
+
+           });
+         }
       });
