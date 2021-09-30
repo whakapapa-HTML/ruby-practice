@@ -121,21 +121,23 @@
 
 
       // 返信表示・非表示
+
       $(document).on('click', ".view_replies_button", function(){
          let text = $(this).attr('id');
          let suffix = text.replace(/[^0-9]/g, '');
          if (suffix !== "") {
            let view_replies_button = document.getElementById(`view_${suffix}`)
            let hide_replies_button = document.getElementById(`hidden_${suffix}`)
-           l
-           
+           let replyForm = document.getElementById(`reply_comments_${suffix}`);
+           replyForm.style.display = "block";
            view_replies_button.style.display = "none";
-           hide_replies_button.style.display = "";
-           $('.hide_replies_button').click(function(){
+           hide_replies_button.style.display = "block";
 
+           $('.hide_replies_button').click(function(){
+             let replies = document.getElementById(`reply_comments_${suffix}`)
+             replyForm.style.display = "none";
              view_replies_button.style.display = "";
              hide_replies_button.style.display = "none";
-
            });
          }
       });

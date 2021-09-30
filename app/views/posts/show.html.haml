@@ -43,7 +43,7 @@
         - if @comments.present?
           - @comments.each do |comment|
             - if comment.parent_id.nil?
-              .flex-column.mt-3.p-3{id:" parent_comment_#{comment.id}"}
+              .comment.flex-column.mt-3.p-3{id:"parent_comment_#{comment.id}"}
                 = image_tag comment.user.image.url, size: "50x50", class: "rounded-circle"
                 %strong
                   = comment.user.name
@@ -65,22 +65,20 @@
                       Close
                 - if comment.replies.present?
                   .view_replies_button.text-right.mr-3.text-primary{id: "view_#{comment.id}" }
-                    View Replies
-                  .hide_replies_button.text-right.mr-3.text-primary{id: "hidden_#{comment.id}", style: "display:none;"}
+                    View Replies(#{comment.replies.count})
+                  .hide_replies_button.text-right.mr-3.text-primary{id: "hidden_#{comment.id}"}
                     Hide Replies
 
-                  .div{id: "replies_insert_point_#{comment.id}"}
-                  %template{id: "replies-#{comment.id}"}
-                    - comment.replies.order(created_at: :desc).each do |reply|
-                      .mt-3.p-3
-                        .text-left.ml-5
-                          = image_tag reply.user.image.url, size: "30x30", class: "rounded-circle"
-                          %strong
-                            = reply.user.name
-                          %small
-                            = reply.created_at.strftime("%Y-%m-%d %H:%M")
-                          .mb-4.ml-5
-                            = reply.content
+                .reply_field.flex-column{id:"reply_comments_#{comment.id}"}
+                  - comment.replies.order(created_at: :desc).each do |reply|
+                    .text-left.mt-3.ml-5.p-3
+                      = image_tag reply.user.image.url, size: "30x30", class: "rounded-circle"
+                      %strong
+                        = reply.user.name
+                      %small
+                        = reply.created_at.strftime("%Y-%m-%d %H:%M")
+                      .mb-4.ml-5
+                        = reply.content
 
         - else
           %p.text-center

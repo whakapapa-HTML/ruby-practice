@@ -78,7 +78,22 @@
      text-decoration: underline;
 }
 
+
+.hide_replies_button {
+     display: none;
+
+}
+
 .hide_replies_button:hover {
      cursor: pointer;
      text-decoration: underline;
+}
+
+.reply_field {
+     display: none;
+}
+
+
+.parent_comment {
+     position: fixed;
 }
