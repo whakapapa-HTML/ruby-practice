@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :jeans, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many :relationships, foreign_key: :following_id
   has_many :followings, through: :relationships, source: :follower
 
@@ -19,5 +20,7 @@ class User < ApplicationRecord
   def is_followed_by?(user)
     reverse_of_relationships.find_by(following_id: user.id).present?
   end
+
+  
 
 end

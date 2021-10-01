@@ -2,9 +2,11 @@ class Post < ApplicationRecord
   has_many :nominee_maps, dependent: :destroy
   has_many :tag_maps, dependent: :destroy
   has_many :tags, through: :tag_maps
+  has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :jean, optional: true
   belongs_to :user
+
 
   mount_uploader :image, PostUploader
 
@@ -21,6 +23,10 @@ class Post < ApplicationRecord
       new_post_tag = Tag.find_or_create_by(tag_name: new) # tag_nameが存在していなければ、新たにレコード追加、既に存在する場合は既存のレコードを取得
       self.tags << new_post_tag
     end
+  end
+
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
   end
 
 end

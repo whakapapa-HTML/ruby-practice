@@ -16,6 +16,7 @@
 //
 //= require activestorage
 //= require_tree .
+//= require social-share-button
 
 /*global jQuery $*/
 
@@ -141,3 +142,16 @@
            });
          }
       });
+
+
+   // コメントフォーム表示機能
+
+    function click_comment_icon(){
+      let postForm = document.getElementById('post_comment_form')
+      postForm.style.display = "block";
+    }
+
+    function click_comment_close(){
+      let postForm = document.getElementById('post_comment_form')
+      postForm.style.display = "none";
+    }

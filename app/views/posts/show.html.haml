@@ -22,25 +22,36 @@
               %p.card.rounded-pill.p-2.mr-2.small
                 = link_to tag_path(tag), class: "link edit-icon" do
                   = tag.tag_name
-          - if current_user
-            .d-flex.icons
-              = link_to edit_post_path(@post), class: "far fa-edit text-secondary text-decoration-none edit-icon" do
-                %i.mr-3
-              %i.far.fa-comment.mr-3
-              %i.far.fa-heart.mr-3
-              %i.far.fa-share-square.mr-3
+          .d-flex.icons
+            - if @post.user == current_user
+              = link_to edit_post_path(@post) do
+                %i.mr-3.far.fa-edit.text-decoration-none.edit-icon
+            %i.far.fa-comment.mr-3{onClick: "click_comment_icon()"}
+            - if @post.favorited_by?(current_user)
+              = link_to post_favorites_path(@post.id), class: "position-relative mr-3", method: :delete do
+                %i.favorites_color.fas.fa-heart
+            - else
+              = link_to post_favorites_path(@post.id), class: "position-relative mr-3", method: :post do
+                %i.favorites_color.text-dark.far.fa-heart.mr-3
+            .ml-3
+              = social_share_button_tag(@post.body)
           %p.text-right.small
             = @post.created_at.strftime("%Y-%m-%d %H:%M")
-        .p-3
+        .p-3.post_comment_form#post_comment_form
           %strong
             Type your message here !!
           = bootstrap_form_with url: post_comments_path(@post.id, @comment), local: true do |f|
             = f.text_area :content, hide_label: true
-            .text-right
-              = f.submit
-
-
+            .d-flex.text-right
+              = f.submit class: "btn btn-primary mr-1"
+              .post_comment_close_button.btn.btn-dark{onclick: "click_comment_close()"}
+                Close
         - if @comments.present?
+          %p.ml-3
+            - if @comments.count == 1
+              ● There is #{@comments.count} message on this post
+            -else
+              ● There are #{@comments.count} messages on this post
           - @comments.each do |comment|
             - if comment.parent_id.nil?
               .comment.flex-column.mt-3.p-3{id:"parent_comment_#{comment.id}"}
