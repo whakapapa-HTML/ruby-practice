@@ -146,12 +146,16 @@
 
    // コメントフォーム表示機能
 
-    function click_comment_icon(){
-      let postForm = document.getElementById('post_comment_form')
+    function click_comment_icon(obj) {
+      let text = $(obj).attr('id');
+      let suffix = text.replace(/[^0-9]/g, '');
+      let postForm = document.getElementById(`post_comment_form_${suffix}`)
       postForm.style.display = "block";
     }
 
-    function click_comment_close(){
-      let postForm = document.getElementById('post_comment_form')
+    function click_comment_close(obj){
+      let text = $(obj).attr('id');
+      let suffix = text.replace(/[^0-9]/g, '');
+      let postForm = document.getElementById(`post_comment_form_${suffix}`)
       postForm.style.display = "none";
     }

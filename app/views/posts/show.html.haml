@@ -1,103 +1,116 @@
 .container-fluid
   .row
     = render 'layouts/sidebar'
-    .col-4.mx-auto
-      .card.mb-4
-        .bd-placeholder-img.card-img-top
-          = image_tag @post.image.url, class: "card-image"
-        .card-body
-          - post_jeans = Jeans.find_by(id: @post.jeans_id)
-          .d-flex
-            = link_to user_path(@post.user) do
-              = image_tag @post.user.image.url, size: "50x50", class: "rounded-circle"
-            .flex-column.ml-3
-              %strong
-                #{post_jeans.name}
-              %p.small
-                #{post_jeans.brand.name} #{post_jeans.lot.number} #{post_jeans.year.date_of_birth}
-          %p.card-text
-            = @post.body
-          .d-flex
-            - @post.tags.each do |tag|
-              %p.card.rounded-pill.p-2.mr-2.small
-                = link_to tag_path(tag), class: "link edit-icon" do
-                  = tag.tag_name
-          .d-flex.icons
-            - if @post.user == current_user
-              = link_to edit_post_path(@post) do
-                %i.mr-3.far.fa-edit.text-decoration-none.edit-icon
-            %i.far.fa-comment.mr-3{onClick: "click_comment_icon()"}
-            - if @post.favorited_by?(current_user)
-              = link_to post_favorites_path(@post.id), class: "position-relative mr-3", method: :delete do
-                %i.favorites_color.fas.fa-heart
-            - else
-              = link_to post_favorites_path(@post.id), class: "position-relative mr-3", method: :post do
-                %i.favorites_color.text-dark.far.fa-heart.mr-3
-            .ml-3
-              = social_share_button_tag(@post.body)
-          %p.text-right.small
-            = @post.created_at.strftime("%Y-%m-%d %H:%M")
-        .p-3.post_comment_form#post_comment_form
-          %strong
-            Type your message here !!
-          = bootstrap_form_with url: post_comments_path(@post.id, @comment), local: true do |f|
-            = f.text_area :content, hide_label: true
-            .d-flex.text-right
-              = f.submit class: "btn btn-primary mr-1"
-              .post_comment_close_button.btn.btn-dark{onclick: "click_comment_close()"}
-                Close
-        - if @comments.present?
-          %p.ml-3
-            - if @comments.count == 1
-              ● There is #{@comments.count} message on this post
-            -else
-              ● There are #{@comments.count} messages on this post
-          - @comments.each do |comment|
-            - if comment.parent_id.nil?
-              .comment.flex-column.mt-3.p-3{id:"parent_comment_#{comment.id}"}
-                = image_tag comment.user.image.url, size: "50x50", class: "rounded-circle"
-                %strong
-                  = comment.user.name
-                %small
-                  = comment.created_at.strftime("%Y-%m-%d %H:%M")
-                %i.reply_button.far.fa-comment-dots.mt-2.p-1{id: "reply-button-#{comment.id}"}
+    .col-6.mx-auto
+      .row
+        .col-9
+          .card.mb-4.mt-5
+            .bd-placeholder-img.card-img-top
+              = image_tag @post.image.url, class: "card-image"
+            .card-body
+              - post_jeans = Jeans.find_by(id: @post.jeans_id)
+              .d-flex
+                = link_to user_path(@post.user) do
+                  = image_tag @post.user.image.url, size: "50x50", class: "rounded-circle"
+                .flex-column.ml-3
+                  %strong
+                    #{post_jeans.name}
+                  %p.small
+                    #{post_jeans.brand.name} #{post_jeans.lot.number} #{post_jeans.year.date_of_birth}
+              %p.card-text
+                = @post.body
+              %p.text-right.small
+                = @post.created_at.strftime("%Y-%m-%d %H:%M")
+              .d-flex
+                - @post.tags.each do |tag|
+                  %p.card.rounded-pill.p-2.mr-2.small
+                    = link_to tag_path(tag), class: "link edit-icon" do
+                      = tag.tag_name
+              .d-flex.icons
+                - if @post.user == current_user
+                  = link_to edit_post_path(@post), class: "position-relative mr-3" do
+                    %i.far.fa-edit.text-decoration-none.text-dark.edit_icon.mr-4
+                %i.far.fa-comment.mr-3.click_comment_icon{onClick: "click_comment_icon(this)", id: "#{@post.id}"}
+                - if @post.favorited_by?(current_user)
+                  = link_to post_favorites_path(@post.id), class: "position-relative mr-3", method: :delete do
+                    %i.favorites_color.fas.fa-heart
+                - else
+                  = link_to post_favorites_path(@post.id), class: "position-relative mr-3", method: :post do
+                    %i.favorites_color.text-dark.far.fa-heart
+                - if @post.user.is_followed_by?(current_user)
+                  = link_to user_relationships_path(user_id: @post.user.id), class: "position-relative ml-4", method: :delete do
+                    %i.far.fa-user.following_color.text-dark
+                - else
+                  = link_to user_relationships_path(user_id: @post.user.id), class: "position-relative ml-4", method: :post do
+                    %i.fas.fa-user.following_color
                 .ml-5
-                  = comment.content
-                .div{id: "reply_form_insert_point_#{comment.id}"}
-                %template{id: "reply-form-#{comment.id}"}
-                  = bootstrap_form_with url: post_comments_path(@post.id, @comment_reply), class: "pt-3 col-10 m-auto", local: true do |f|
+                  = social_share_button_tag(@post.body)
+            .p-3.post_comment_form{id: "post_comment_form_#{@post.id}"}
+              %strong
+                Type your message here !!
+              = bootstrap_form_with url: post_comments_path(@post.id, @comment), local: true do |f|
+                = f.text_area :content, hide_label: true
+                .d-flex.text-right
+                  = f.submit class: "btn btn-primary mr-1"
+                  .post_comment_close_button.btn.btn-dark{onclick: "click_comment_close(this)", id: "#{@post.id}"}
+                    Close
+            - if @comments.present?
+              %p.ml-3.mr-3.pt-3.border-top
+                - if @comments.count == 1
+                  ● There is #{@comments.count} message on this post
+                -else
+                  ● There are #{@comments.count} messages on this post
+              - @comments.each do |comment|
+                - if comment.parent_id.nil?
+                  .comment.flex-column.mt-3.p-3{id:"parent_comment_#{comment.id}"}
+                    = image_tag comment.user.image.url, size: "50x50", class: "rounded-circle"
                     %strong
-                      Reply
-                    = f.text_area :content, hide_label: true
-                    = f.hidden_field :post_id, value: @post.id
-                    = f.hidden_field :parent_id, value: comment.id
-                    = f.submit "Reply", class: "btn btn-primary"
-                    .reply_close_button.btn.btn-dark{ id: "#reply_close_button_#{comment.id}", onclick: "this.parentNode.innerHTML=''"}
-                      Close
-                - if comment.replies.present?
-                  .view_replies_button.text-right.mr-3.text-primary{id: "view_#{comment.id}" }
-                    View Replies(#{comment.replies.count})
-                  .hide_replies_button.text-right.mr-3.text-primary{id: "hidden_#{comment.id}"}
-                    Hide Replies
+                      = comment.user.name
+                    %small
+                      = comment.created_at.strftime("%Y-%m-%d %H:%M")
+                    %i.reply_button.far.fa-comment-dots.mt-2.p-1{id: "reply-button-#{comment.id}"}
+                    .ml-5
+                      = comment.content
+                    .div{id: "reply_form_insert_point_#{comment.id}"}
+                    %template{id: "reply-form-#{comment.id}"}
+                      = bootstrap_form_with url: post_comments_path(@post.id, @comment_reply), class: "pt-3 col-10 m-auto", local: true do |f|
+                        %strong
+                          Reply
+                        = f.text_area :content, hide_label: true
+                        = f.hidden_field :post_id, value: @post.id
+                        = f.hidden_field :parent_id, value: comment.id
+                        = f.submit "Reply", class: "btn btn-primary"
+                        .reply_close_button.btn.btn-dark{ id: "#reply_close_button_#{comment.id}", onclick: "this.parentNode.innerHTML=''"}
+                          Close
+                    - if comment.replies.present?
+                      .view_replies_button.text-right.mr-3.text-primary{id: "view_#{comment.id}" }
+                        View Replies(#{comment.replies.count})
+                      .hide_replies_button.text-right.mr-3.text-primary{id: "hidden_#{comment.id}"}
+                        Hide Replies
 
-                .reply_field.flex-column{id:"reply_comments_#{comment.id}"}
-                  - comment.replies.order(created_at: :desc).each do |reply|
-                    .text-left.mt-3.ml-5.p-3
-                      = image_tag reply.user.image.url, size: "30x30", class: "rounded-circle"
-                      %strong
-                        = reply.user.name
-                      %small
-                        = reply.created_at.strftime("%Y-%m-%d %H:%M")
-                      .mb-4.ml-5
-                        = reply.content
+                    .reply_field.flex-column{id:"reply_comments_#{comment.id}"}
+                      - comment.replies.order(created_at: :desc).each do |reply|
+                        .text-left.mt-3.ml-5.p-3
+                          = image_tag reply.user.image.url, size: "30x30", class: "rounded-circle"
+                          %strong
+                            = reply.user.name
+                          %small
+                            = reply.created_at.strftime("%Y-%m-%d %H:%M")
+                          .mb-4.ml-5
+                            = reply.content
 
-        - else
-          %p.text-center
-            There's no message for this post yet.
+            - else
+              %p.text-center
+                There's no message for this post yet.
+        .col-3.mb-4.mt-5.border-right.border-top.border-info
+          - post_jeans = Jeans.find_by(id: @post.jeans_id)
+          - date =  (@post.created_at - post_jeans.date_of_purchase.to_time.to_datetime).to_i
+          - difference_date = (date / 1.day)
+          %p.strong.h4.text-info.pt-3
+            Day #{difference_date}
+
+
     .col-3
-
-
-
 
 
 

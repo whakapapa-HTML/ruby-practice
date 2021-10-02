@@ -45,13 +45,6 @@
     font-size: 130%;
 }
 
-.fa-edit {
-    color: #CCCCCC;
-}
-
-.edit-icon:hover {
-     color: #008BBB;
-}
 
 .fa-heart:hover {
      color: #008BBB;
@@ -61,13 +54,6 @@
      color: #008BBB;
 }
 
-.fa-comment:hover {
-     color: #008BBB;
-}
-
-.fa:hover {
-    color: #008BBB;
-}
 
 .other-jeans-image {
      width: 250px;
@@ -87,7 +73,6 @@
 
 .hide_replies_button {
      display: none;
-
 }
 
 .hide_replies_button:hover {
@@ -119,11 +104,17 @@
     top: 0;
 }
 
-.favorites_color:hover {
-    color :#FF5192;
+.following_color::before {
+    position: absolute;
+    top: 0;
 }
 
-$size: 24px;
+.edit_icon::before {
+    position: absolute;
+    top: 0;
+}
+
+$size: 22px;
 
 .social-share-button {
   .ssb-icon {
