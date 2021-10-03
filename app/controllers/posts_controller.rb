@@ -18,6 +18,9 @@ class PostsController < ApplicationController
     @comment = @post.comments.build  # 投稿全体へのコメント投稿用の変数
     @comment_reply = @post.comments.build  # コメントに対する返信用の変数
     @comments = Comment.includes(:user).where(post_id: @post.id).order(created_at: :desc)
+    post_jeans = Jeans.find_by(id: @post.jeans_id)
+    date =  (@post.created_at - post_jeans.date_of_purchase.to_time.to_datetime).to_i
+    @difference_date = (date / 1.day)
   end
 
   def create

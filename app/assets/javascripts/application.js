@@ -102,6 +102,16 @@
      });
     }); //$(document).on('turbolinks:load', function()
 
+　　// コメント表示
+
+　　function comments_view(obj){
+      let text = $(obj).attr('id');
+      let suffix = text.replace(/[^0-9]/g, '');
+      let element = document.getElementById(`parent_comment_${suffix}`);
+      element.style.display = "none";
+      console.log(element)
+    }
+
 
     // 返信フォームの処理
 
@@ -159,3 +169,4 @@
       let postForm = document.getElementById(`post_comment_form_${suffix}`)
       postForm.style.display = "none";
     }
+

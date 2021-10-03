@@ -1,7 +1,7 @@
 .container-fluid
   .row
     = render 'layouts/sidebar'
-    .col-4.mx-auto
+    .col-6.mx-auto
       .d-flex.mb-3
         %h4
           Tag:
@@ -10,5 +10,8 @@
           (#{@tag.posts.count})
       %strong
       - @tag.posts.each do |post|
-        = render 'posts/posts', post: post
+        - comment = post.comments.build
+        - comment_reply = post.comments.build
+        - comments = Comment.includes(:user).where(post_id: post.id).order(created_at: :desc)
+        = render 'posts/posts', {post: post, comment: comment, comment_reply: comment_reply, comments: comments }
     .col-3
