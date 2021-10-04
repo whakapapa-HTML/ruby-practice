@@ -108,10 +108,12 @@
       let text = $(obj).attr('id');
       let suffix = text.replace(/[^0-9]/g, '');
       let element = document.getElementById(`parent_comment_${suffix}`);
-      element.style.display = "none";
-      console.log(element)
+      if (element.style.display=="none"){
+        element.style.display = "block";
+      }else{
+        element.style.display = "none";
+      }
     }
-
 
     // 返信フォームの処理
 
@@ -137,15 +139,15 @@
          let text = $(this).attr('id');
          let suffix = text.replace(/[^0-9]/g, '');
          if (suffix !== "") {
-           let view_replies_button = document.getElementById(`view_${suffix}`)
-           let hide_replies_button = document.getElementById(`hidden_${suffix}`)
+           let view_replies_button = document.getElementById(`view_${suffix}`);
+           let hide_replies_button = document.getElementById(`hidden_${suffix}`);
            let replyForm = document.getElementById(`reply_comments_${suffix}`);
            replyForm.style.display = "block";
            view_replies_button.style.display = "none";
            hide_replies_button.style.display = "block";
 
            $('.hide_replies_button').click(function(){
-             let replies = document.getElementById(`reply_comments_${suffix}`)
+             let replies = document.getElementById(`reply_comments_${suffix}`);
              replyForm.style.display = "none";
              view_replies_button.style.display = "";
              hide_replies_button.style.display = "none";

@@ -21,6 +21,10 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+ h1, h2, h3, h4, li, small{
+    font-family: 'Ultra', serif;
+}
+
 .link {
   color: black;
 }
@@ -134,6 +138,32 @@ $size: 22px;
     background-color: #0666cc;
 }
 
-.second_step {
+.third_step {
     background-color: #087fff;
+}
+
+// コメント表示機能
+.comments_view {
+    cursor: pointer;
+}
+
+.comment {
+    display: none;
+}
+
+//　文字の点滅
+
+.view_flash {
+     color: #043c78;
+     animation: flash 2s linear infinite;
+}
+
+@keyframes flash {
+  0%,100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
