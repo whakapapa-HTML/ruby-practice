@@ -34,6 +34,13 @@ class PostsController < ApplicationController
     end
   end
 
+   def timeline
+      @posts_all = Post.all
+      @user = current_user
+      @follow_users = @user.followings  # ユーザーのフォローする他ユーザーの投稿を持ってくる
+      @posts = @posts_all.where(user_id: @follow_users).order("created_at DESC")
+   end
+
 
 
   private

@@ -2,7 +2,7 @@
   .row
     = render 'layouts/sidebar'
     .col-4.mx-auto
-      %strong
+      %h2
         .mb-4
           Post Your Jeans
       = bootstrap_form_with(url: posts_path, model: Post.new, local: true) do |f|

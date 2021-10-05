@@ -1,0 +1,13 @@
+.container-fluid
+  .row
+    = render 'layouts/sidebar'
+    .col-6.mx-auto
+      %h2
+        Timeline
+      - @posts.each do |post|
+        - comment = post.comments.build
+        - comment_reply = post.comments.build
+        - comments = Comment.includes(:user).where(post_id: post.id).order(created_at: :desc)
+        = render 'posts/posts', {post: post, comment: comment, comment_reply: comment_reply, comments: comments }
+
+    .col-3

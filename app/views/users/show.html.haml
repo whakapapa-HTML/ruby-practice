@@ -40,6 +40,10 @@
             -if @user == current_user
               = link_to my_page_jeans_path do
                 %strong view your jeans
+      .user_posts_image
+        - @user.posts.each do |post|
+          = image_tag post.image.url, size: "70x500", class: "mt-3 user_posts_image"
+
       - @user.posts.each do |post|
         - comment = post.comments.build
         - comment_reply = post.comments.build

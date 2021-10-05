@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'my_page/edit' => 'users#edit'
   get 'my_page/jeans' => 'jeans#index'
   get 'my_page/jeans/:id' => 'jeans#show', as: 'my_jeans'
+  get 'my_page/timeline' => 'posts#timeline', as: 'timeline'
   resources :tags do
     get 'posts', to: 'posts#search'
   end

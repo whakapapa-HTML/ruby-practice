@@ -5,19 +5,21 @@
         = link_to others_path, class: "text-dark text-decoration-none" do
           %h1.pb-0
             Jeans
-        %small raise your jeans, live with jeans
+          %small raise your jeans, live with jeans
       %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
       #navbarNavDropdown.collapse.navbar-collapse
         %ul.navbar-nav.ml-auto
           - if user_signed_in?
             %li.nav-item
-              = link_to 'mypage', my_page_path, class: 'nav-link text-dark'
+              = link_to 'MY PAGE', my_page_path, class: 'nav-link text-dark'
             %li.nav-item
-              = link_to "post", posts_path, class: 'nav-link text-dark'
+              = link_to "POST JEANS", posts_path, class: 'nav-link text-dark'
             %li.nav-item
-              = link_to "logout", destroy_user_session_path, method: :delete, class: 'nav-link text-dark'
+              = link_to "TIMELINE", timeline_path, class: 'nav-link text-dark'
+            %li.nav-item
+              = link_to "LOG OUT", destroy_user_session_path, method: :delete, class: 'nav-link text-dark'
           - else
             %li.nav-item
-              = link_to "signup", new_user_registration_path, class: 'nav-link text-dark'
+              = link_to "SINE UP", new_user_registration_path, class: 'nav-link text-dark'
             %li.nav-item
-              = link_to "login", new_user_session_path, class: 'nav-link text-dark'
+              = link_to "LOG IN", new_user_session_path, class: 'nav-link text-dark'

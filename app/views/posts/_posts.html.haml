@@ -35,10 +35,10 @@
               %i.favorites_color.text-dark.far.fa-heart
           - if  post.user.is_followed_by?(current_user)
             = link_to user_relationships_path(user_id: post.user.id), class: "position-relative ml-4", method: :delete do
-              %i.far.fa-user.following_color.text-dark
+              %i.following_color.fas.fa-user.text-dark
           - else
             = link_to user_relationships_path(user_id: post.user.id), class: "position-relative ml-4", method: :post do
-              %i.fas.fa-user.following_color
+              %i.far.fa-user.following_color
           .ml-5
             = social_share_button_tag( post.body)
       .p-3.post_comment_form{id: "post_comment_form_#{post.id}"}

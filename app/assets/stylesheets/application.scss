@@ -21,8 +21,27 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
- h1, h2, h3, h4, li, small{
+a, h1, h2, h3, h4, li, small, label {
     font-family: 'Ultra', serif;
+    &:hover {
+      color: white;
+    }
+}
+
+// h1:hover, h2:hover,  h3:hover, h4:hover,  li:hover, a:hover, label:hover {
+
+// }
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image:url("/uploads/user/image/denim.jpg");
+  background-size: cover;
+}
+
+.bg-mask {
+  background: rgba(255,255,255,0.6);
 }
 
 .link {
@@ -166,4 +185,8 @@ $size: 22px;
   50% {
     opacity: 0;
   }
+}
+
+.user_posts_image {
+    object-fit: cover;
 }
