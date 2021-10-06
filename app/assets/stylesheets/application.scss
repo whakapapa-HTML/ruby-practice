@@ -21,10 +21,14 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
-a, h1, h2, h3, h4, li, small, label {
+label {
+   font-family: 'Ultra', serif;
+}
+
+a, h1, h2, h3, h4, li, small {
     font-family: 'Ultra', serif;
     &:hover {
-      color: white;
+      color: #800000;
     }
 }
 
@@ -117,6 +121,13 @@ body {
 .post_comment_form {
     display: none;
 }
+
+.torophy_color::before {
+    position: absolute;
+    top: 0;
+    animation: flash 2s linear infinite;
+}
+
 
 .favorites_color {
     color :#FF5192;

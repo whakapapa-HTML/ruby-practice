@@ -1,5 +1,4 @@
 class Post < ApplicationRecord
-  has_many :nominee_maps, dependent: :destroy
   has_many :tag_maps, dependent: :destroy
   has_many :tags, through: :tag_maps
   has_many :favorites, dependent: :destroy

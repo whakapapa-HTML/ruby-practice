@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_01_032258) do
+ActiveRecord::Schema.define(version: 2021_10_06_123845) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -66,13 +66,13 @@ ActiveRecord::Schema.define(version: 2021_10_01_032258) do
 
   create_table "nominee_maps", force: :cascade do |t|
     t.string "nominee_id"
-    t.integer "post_id"
+    t.integer "jeans_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "nominees", force: :cascade do |t|
-    t.string "name"
+    t.integer "name"
     t.string "introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

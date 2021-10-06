@@ -9,12 +9,13 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
   get 'others' => 'posts#others'
-  resources :nominee_maps, only: [:create, :destroy]
   resources :nominees do
     get 'posts', to: 'posts#search'
   end
   resources :users do
-    resources :jeans
+    resources :jeans do
+      resources :nominee_maps, only: [:create, :destroy]
+    end
     resource :relationships, only: [:create, :destroy]
     get :followings, on: :member
     get :followers, on: :member

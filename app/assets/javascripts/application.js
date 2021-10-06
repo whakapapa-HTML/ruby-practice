@@ -172,3 +172,12 @@
       postForm.style.display = "none";
     }
 
+
+   // ノミネートフォーム表示
+
+    function click_trophy_icon(obj){
+      let text = $(obj).attr('id')
+      let suffix = text.replace(/[^0-9]/g, '');
+      let NomineeFrom = document.getElementById(`trophy_icon_${suffix}`)
+
+　　}
