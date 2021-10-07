@@ -31,7 +31,6 @@
               .d-flex.icons
                 .position-relative.mr-3
                   %i.fas.fa-trophy.text-warning.mr-4.torophy_color{onClick: "click_trophy_icon(this)", id: "trophy_icon_#{@post.id}" }
-                    
                 - if @post.user == current_user
                   = link_to edit_post_path(@post), class: "position-relative mr-3" do
                     %i.far.fa-edit.text-decoration-none.text-dark.edit_icon.mr-4

@@ -43,7 +43,7 @@
       .user_posts_image
         - @user.posts.each do |post|
           = link_to(anchor: "flash_#{post.id}") do
-            = image_tag post.image.url, size: "70x500", onload: "user_posts_image(this)", class: "mt-3 user_posts_image", id: "user_posts_image_#{post.id}"
+            = image_tag post.image.url, size: "70x500", class: "mt-3 user_posts_image", id: "user_posts_image_#{post.id}"
 
       - @user.posts.each do |post|
         - comment = post.comments.build

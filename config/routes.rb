@@ -13,9 +13,7 @@ Rails.application.routes.draw do
     get 'posts', to: 'posts#search'
   end
   resources :users do
-    resources :jeans do
-      resources :nominee_maps, only: [:create, :destroy]
-    end
+    resources :jeans
     resource :relationships, only: [:create, :destroy]
     get :followings, on: :member
     get :followers, on: :member
@@ -28,5 +26,6 @@ Rails.application.routes.draw do
   resources :tags do
     get 'posts', to: 'posts#search'
   end
+  resources :nominee_maps, only: [:create, :destroy]
 
 end

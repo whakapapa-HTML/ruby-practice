@@ -7,8 +7,8 @@ class JeansController < ApplicationController
   end
 
   def create
-    @jean = Jeans.new(jeans_params)
-    @jean.save
+    jean = Jeans.new(jeans_params)
+    jean.save
     redirect_to request.referer
   end
 

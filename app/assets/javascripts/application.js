@@ -178,6 +178,13 @@
     function click_trophy_icon(obj){
       let text = $(obj).attr('id')
       let suffix = text.replace(/[^0-9]/g, '');
-      let NomineeFrom = document.getElementById(`trophy_icon_${suffix}`)
+      let nominateForm = document.getElementById(`nominate_form_${suffix}`)
+      nominateForm.style.display = "block";
+　　}
 
+    function close_trophy_icon(obj){
+      let text = $(obj).attr('id')
+      let suffix = text.replace(/[^0-9]/g, '');
+      let nominateForm = document.getElementById(`nominate_form_${suffix}`)
+      nominateForm.style.display = "none";
 　　}
