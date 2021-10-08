@@ -9,4 +9,8 @@ class Jeans < ApplicationRecord
   has_many :nominee_maps, dependent: :destroy, foreign_key: 'jeans_id'
 
   mount_uploader :jeans_image, JeansUploader
+
+  def is_nominated_by?(jeans, user)
+    jeans.nominee_maps.find_by(user_id: user.id)
+  end
 end

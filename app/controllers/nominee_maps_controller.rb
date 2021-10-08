@@ -11,7 +11,7 @@ class NomineeMapsController < ApplicationController
 
   private
   def nominee_map_params
-     params.require(:nominee_map).permit(:jeans_id, :nominee_id)
+     params.permit(:jeans_id, :nominee_id, :user_id)
   end
 
 end

@@ -122,12 +122,16 @@ body {
     display: none;
 }
 
-.torophy_color::before {
+.trophy_icon::before {
     position: absolute;
     top: 0;
     animation: flash 2s linear infinite;
 }
 
+.trophy_complete:before {
+    position: absolute;
+    top: 0;
+}
 
 .favorites_color {
     color :#FF5192;

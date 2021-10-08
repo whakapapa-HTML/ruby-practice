@@ -188,3 +188,8 @@
       let nominateForm = document.getElementById(`nominate_form_${suffix}`)
       nominateForm.style.display = "none";
 　　}
+
+
+   function click_trophy_complete() {
+       alert("Thanks for your voting!!")
+   }

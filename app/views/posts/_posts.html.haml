@@ -23,8 +23,12 @@
               = link_to tag_path(tag), class: "link edit-icon" do
                 = tag.tag_name
         .d-flex.icons
-          .position-relative.mr-3
-            %i.fas.fa-trophy.text-warning.mr-4.torophy_color{onClick: "click_trophy_icon(this)", id: "#{post.id}" }
+          -if post_jeans.is_nominated_by?(post_jeans, current_user)
+            .position-relative.mr-3
+              %i.fas.fa-check-circle.mr-4.trophy_complete{onClick: "click_trophy_complete()"}
+          -else
+            .position-relative.mr-3
+              %i.fas.fa-trophy.text-warning.mr-4.torophy_icon{onClick: "click_trophy_icon(this)", id: "#{post.id}" }
           - if  post.user == current_user
             = link_to edit_post_path(post), class: "position-relative mr-3" do
               %i.far.fa-edit.text-decoration-none.edit_icon.mr-4.text-dark
@@ -58,8 +62,10 @@
             Nominate This Jeans to...
           - Nominee.names.each do | name, nominee_id |
             .d-flex
+
               = f.radio_button :nominee_id, nominee_id, hide_label: true
-              = f.hidden_field :jeans_id, value:  post.jeans_id
+              = f.hidden_field :jeans_id, value: post.jeans_id
+              = f.hidden_field :user_id, value: current_user.id
               = f.label name
           = f.submit 'Vote!', class: "btn btn-primary"
           .nominate_close_button.btn.btn-dark{onclick: "close_trophy_icon(this)", id: "#{post.id}"}
