@@ -11,15 +11,17 @@
         %ul.navbar-nav.ml-auto
           - if user_signed_in?
             %li.nav-item
-              = link_to 'MY PAGE', my_page_path, class: 'nav-link text-dark'
+              = link_to "LOOK NOMINEES", nominees_path, class: 'nav-link'
             %li.nav-item
-              = link_to "POST JEANS", posts_path, class: 'nav-link text-dark'
+              = link_to 'MY PAGE', my_page_path, class: 'nav-link'
             %li.nav-item
-              = link_to "TIMELINE", timeline_path, class: 'nav-link text-dark'
+              = link_to "POST JEANS", posts_path, class: 'nav-link'
             %li.nav-item
-              = link_to "LOG OUT", destroy_user_session_path, method: :delete, class: 'nav-link text-dark'
+              = link_to "TIMELINE", timeline_path, class: 'nav-link'
+            %li.nav-item
+              = link_to "LOG OUT", destroy_user_session_path, method: :delete, class: 'nav-link'
           - else
             %li.nav-item
-              = link_to "SINE UP", new_user_registration_path, class: 'nav-link text-dark'
+              = link_to "SINE UP", new_user_registration_path, class: 'nav-link  '
             %li.nav-item
-              = link_to "LOG IN", new_user_session_path, class: 'nav-link text-dark'
+              = link_to "LOG IN", new_user_session_path, class: 'nav-link  '

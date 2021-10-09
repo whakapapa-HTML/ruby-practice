@@ -17,6 +17,8 @@
 //= require activestorage
 //= require_tree .
 //= require social-share-button
+//= require chartkick
+//= require Chart.bundle
 
 /*global jQuery $*/
 
@@ -189,7 +191,7 @@
       nominateForm.style.display = "none";
 　　}
 
-
+  // 投票後、アラート表示
    function click_trophy_complete() {
        alert("Thanks for your voting!!")
    }

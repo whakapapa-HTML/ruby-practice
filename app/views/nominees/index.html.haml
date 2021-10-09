@@ -1,0 +1,37 @@
+.container-fluid
+  .row
+    = render 'layouts/sidebar'
+    .col-6.mx-auto
+      .flex-column
+        %h3.text-dark.text-decoration-none
+          ◆ Look this weeks nominee
+          .p-5
+            %h4
+              Best Faded award
+            - faded_award =  @jeans.where(nominee_id: 1)
+            - jeans = faded_award.find_by(jeans_id: 1)
+            - jeans = Jeans.find_by(id: jeans.jeans_id)
+            = bar_chart faded_award.count
+          .p-5
+            %h4
+              Best Fashinable
+            - faded_award =  @jeans.where(nominee_id: 2)
+            = bar_chart faded_award.count
+          .p-5
+            %h4
+              Best Whisker
+            - faded_award =  @jeans.where(nominee_id: 3)
+            = bar_chart faded_award.count
+          .p-5
+            %h4
+              Best Shevron
+            - faded_award =  @jeans.where(nominee_id: 4)
+            = bar_chart faded_award.count
+          .p-5
+            %h4
+              Best 501
+            - faded_award =  @jeans.where(nominee_id: 5)
+            = bar_chart faded_award.count
+        %h3.text-dark.text-decoration-none
+          ◆ Look last week's winner
+    .col-3

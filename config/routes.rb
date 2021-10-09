@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get 'my_page/jeans' => 'jeans#index'
   get 'my_page/jeans/:id' => 'jeans#show', as: 'my_jeans'
   get 'my_page/timeline' => 'posts#timeline', as: 'timeline'
+  get 'this_week', to: 'nominees#this_week'
+  get 'last_weeks_winner', to: 'nominees#last_weeks_winner'
   resources :tags do
     get 'posts', to: 'posts#search'
   end
