@@ -1,8 +1,8 @@
 class NomineesController < ApplicationController
 
   def index
-    nominees = NomineeMap.group(:nominee_id)
-    @jeans = nominees.group(:jeans_id)
+    nominees = NomineeMap.group(:nominee_id).limit(5)
+    @jeans = nominees.group(:jeans_id).order('count(nominee_id) desc')
   end
 
   def this_week
