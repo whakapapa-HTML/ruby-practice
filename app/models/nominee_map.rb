@@ -1,8 +1,6 @@
 class NomineeMap < ApplicationRecord
 
-  belongs_to :nominee
-  belongs_to :jeans
+  belongs_to :nominee,  optional: true
+  belongs_to :jeans,  optional: true
 
-  validates :nominee_id, presence: true
-  validates :jeans_id, presence: true
 end

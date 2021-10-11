@@ -11,7 +11,7 @@
         %ul.navbar-nav.ml-auto
           - if user_signed_in?
             %li.nav-item
-              = link_to "LOOK NOMINEES", nominees_path, class: 'nav-link'
+              = link_to "LOOK NOMINEES", this_week_path, class: 'nav-link'
             %li.nav-item
               = link_to 'MY PAGE', my_page_path, class: 'nav-link'
             %li.nav-item

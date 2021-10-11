@@ -10,19 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_070824) do
+ActiveRecord::Schema.define(version: 2021_10_11_124403) do
 
-  create_table "brands", force: :cascade do |t|
+  create_table "award_maps", force: :cascade do |t|
+    t.integer "award_id"
+    t.integer "jeans_id"
     t.string "name"
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "chats", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "room_id"
-    t.text "message"
+  create_table "awards", force: :cascade do |t|
+    t.integer "jeans_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "name"
+  end
+
+  create_table "brands", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_070824) do
     t.integer "lot_id"
     t.integer "year_id"
     t.string "name"
+    t.integer "number_of_award"
   end
 
   create_table "lots", force: :cascade do |t|
@@ -95,11 +103,6 @@ ActiveRecord::Schema.define(version: 2021_10_08_070824) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tag_maps", force: :cascade do |t|
     t.integer "post_id"
     t.integer "tag_id"
@@ -109,13 +112,6 @@ ActiveRecord::Schema.define(version: 2021_10_08_070824) do
 
   create_table "tags", force: :cascade do |t|
     t.string "tag_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "user_rooms", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
