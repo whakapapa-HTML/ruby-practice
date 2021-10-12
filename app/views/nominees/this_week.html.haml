@@ -5,129 +5,145 @@
       .flex-column
         %h3.text-dark.text-decoration-none.p-3
           ◆ Look this weeks nominee
-        .p-5
-          %h4.text-center
+        .p-5.text-center
+          %h4
             Best Fashionable
-          %table.table.table-dark
-            %thead
-              %tr
-                %th
-                %th
-                  Jeans Name
-                %th.text-center{scope:"col"}
-                  number of votes obtained
-            %tbody
-            // faded_award = ノミニーインスタンスが入っている
-            - faded_award =  @jeans.where(nominee_id: 1)
-            - faded_award.each do |f|
-              - jeans = Jeans.find_by(id: f.jeans_id)
-              %tr.mt-5
-                %th.pr-3
-                  = link_to user_path(jeans.user) do
-                    = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
-                %th.pr-3
-                  = jeans.name
-                %td.text-center
-                  = jeans.nominee_maps.where(nominee_id: 1).count
+          - if @jeans.where(nominee_id: 1).present?
+            %table.table.table-dark
+              %thead
+                %tr
+                  %th
+                  %th.text-center
+                    Jeans Name
+                  %th.text-center{scope:"col"}
+                    number of nominees obtained
+              %tbody
+              // faded_award = ノミニーインスタンスが入っている
+              - faded_award =  @jeans.where(nominee_id: 1)
+              - faded_award.each do |f|
+                - jeans = Jeans.find_by(id: f.jeans_id)
+                %tr.mt-5
+                  %th.pr-3text-center
+                    = link_to user_path(jeans.user) do
+                      = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
+                  %th.pr-3.text-center
+                    = jeans.name
+                  %td.text-center
+                    = jeans.nominee_maps.where(nominee_id: 1).count
+          - else
+            There's no nominees yet.
 
 
-        .p-5
-          %h4.text-center
+        .p-5.text-center
+          %h4
             Best Fashionable
-          %table.table.table-dark
-            %thead
-              %tr
-                %th
-                %th
-                  Jeans Name
-                %th.text-center{scope:"col"}
-                  number of votes obtained
-            %tbody
-            // faded_award = ノミニーインスタンスが入っている
-            - faded_award =  @jeans.where(nominee_id: 2)
-            - faded_award.each do |f|
-              - jeans = Jeans.find_by(id: f.jeans_id)
-              %tr.mt-5
-                %th.pr-3
-                  = link_to user_path(jeans.user) do
-                    = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
-                %th.pr-3
-                  = jeans.name
-                %td.text-center
-                  = jeans.nominee_maps.where(nominee_id: 2).count
+          - if @jeans.where(nominee_id: 2).present?
+            %table.table.table-dark
+              %thead
+                %tr
+                  %th
+                  %th.text-center
+                    Jeans Name
+                  %th.text-center{scope:"col"}
+                    number of nominees obtained
+              %tbody
+              // faded_award = ノミニーインスタンスが入っている
+              - faded_award =  @jeans.where(nominee_id: 2)
+              - faded_award.each do |f|
+                - jeans = Jeans.find_by(id: f.jeans_id)
+                %tr.mt-5
+                  %th.pr-3.text-center
+                    = link_to user_path(jeans.user) do
+                      = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
+                  %th.pr-3.text-center
+                    = jeans.name
+                  %td.text-center
+                    = jeans.nominee_maps.where(nominee_id: 2).count
+          - else
+            There's no nominees yet.
 
-        .p-5
-          %h4.text-center
+        .p-5.text-center
+          %h4
             Best Fashionable
-          %table.table.table-dark
-            %thead
-              %tr
-                %th
-                %th
-                  Jeans Name
-                %th.text-center{scope:"col"}
-                  number of votes obtained
-            %tbody
-            // faded_award = ノミニーインスタンスが入っている
-            - faded_award =  @jeans.where(nominee_id: 3)
-            - faded_award.each do |f|
-              - jeans = Jeans.find_by(id: f.jeans_id)
-              %tr.mt-5
-                %th.pr-3
-                  = link_to user_path(jeans.user) do
-                    = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
-                %th.pr-3
-                  = jeans.name
-                %td.text-center
-                  = jeans.nominee_maps.where(nominee_id: 3).count
+          - if @jeans.where(nominee_id: 3).present?
+            %table.table.table-dark
+              %thead
+                %tr
+                  %th
+                  %th.text-center
+                    Jeans Name
+                  %th.text-center{scope:"col"}
+                    number of nominees obtained
+              %tbody
+              // faded_award = ノミニーインスタンスが入っている
+              - faded_award =  @jeans.where(nominee_id: 3)
+              - faded_award.each do |f|
+                - jeans = Jeans.find_by(id: f.jeans_id)
+                %tr.mt-5
+                  %th.pr-3.text-center
+                    = link_to user_path(jeans.user) do
+                      = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
+                  %th.pr-3.text-center
+                    = jeans.name
+                  %td.text-center
+                    = jeans.nominee_maps.where(nominee_id: 3).count
+          - else
+            There's no nominees yet.
 
-        .p-5
-          %h4.text-center
+        .p-5.text-center
+          %h4
             Best Fashionable
-          %table.table.table-dark
-            %thead
-              %tr
-                %th
-                %th
-                  Jeans Name
-                %th{scope:"col"}
-                  number of votes obtained
-            %tbody
-            // faded_award = ノミニーインスタンスが入っている
-            - faded_award =  @jeans.where(nominee_id: 4)
-            - faded_award.each do |f|
-              - jeans = Jeans.find_by(id: f.jeans_id)
-              %tr.mt-5
-                %th.pr-3
-                  = link_to user_path(jeans.user) do
-                    = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
-                %th.pr-3
-                  = jeans.name
-                %td.text-center
-                  = jeans.nominee_maps.where(nominee_id: 4).count
+          - if @jeans.where(nominee_id: 4).present?
+            %table.table.table-dark
+              %thead
+                %tr
+                  %th
+                  %th.text-center
+                    Jeans Name
+                  %th{scope:"col"}
+                    number of nominees obtained
+              %tbody
+              // faded_award = ノミニーインスタンスが入っている
+              - faded_award =  @jeans.where(nominee_id: 4)
+              - faded_award.each do |f|
+                - jeans = Jeans.find_by(id: f.jeans_id)
+                %tr.mt-5
+                  %th.pr-3.text-center
+                    = link_to user_path(jeans.user) do
+                      = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
+                  %th.pr-3.text-center
+                    = jeans.name
+                  %td.text-center
+                    = jeans.nominee_maps.where(nominee_id: 4).count
+          - else
+            There's no nominees yet.
 
-        .p-5
-          %h4.text-center
+        .p-5.text-center
+          %h4
             Best Fashionable
-          %table.table.table-dark
-            %thead
-              %tr
-                %th
-                %th
-                  Jeans Name
-                %th.text-center{scope:"col"}
-                  number of votes obtained
-            %tbody
-            // faded_award = ノミニーインスタンスが入っている
-            - faded_award =  @jeans.where(nominee_id: 5)
-            - faded_award.each do |f|
-              - jeans = Jeans.find_by(id: f.jeans_id)
-              %tr.mt-5
-                %th.pr-3
-                  = link_to user_path(jeans.user) do
-                    = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
-                %th.pr-3
-                  = jeans.name
-                %td.text-center
-                  = jeans.nominee_maps.where(nominee_id: 5).count
+          - if @jeans.where(nominee_id: 5).present?
+            %table.table.table-dark
+              %thead
+                %tr
+                  %th
+                  %th.text-center
+                    Jeans Name
+                  %th.text-center{scope:"col"}
+                    number of nominees obtained
+              %tbody
+              // faded_award = ノミニーインスタンスが入っている
+              - faded_award =  @jeans.where(nominee_id: 5)
+              - faded_award.each do |f|
+                - jeans = Jeans.find_by(id: f.jeans_id)
+                %tr.mt-5
+                  %th.pr-3.text-center
+                    = link_to user_path(jeans.user) do
+                      = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
+                  %th.pr-3.text-center
+                    = jeans.name
+                  %td.text-center
+                    = jeans.nominee_maps.where(nominee_id: 5).count
+          - else
+            There's no nominees yet.
+
     .col-3

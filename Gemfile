@@ -78,3 +78,5 @@ gem 'haml-rails'
 gem 'faker'
 gem 'social-share-button'
 gem 'chartkick'
+
+gem 'whenever', require: false
