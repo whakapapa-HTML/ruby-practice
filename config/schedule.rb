@@ -19,11 +19,22 @@
 
 # Learn more: http://github.com/javan/whenever
 
-env :PATH, ENV['PATH'] # 絶対パスから相対パス指定
-set :output, 'log/cron.log' # ログの出力先ファイルを設定
-set :environment, :development # 環境を設定
+# Rails.rootを使用するために必要。なぜなら、wheneverは読み込まれるときにrailsを起動する必要がある
+require File.expand_path(File.dirname(__FILE__) + "/environment")
+# cronを実行する環境変数
+rails_env = ENV['RAILS_ENV'] || :development
+# cronを実行する環境変数をセット
+set :environment, rails_env
 
-every 1.minute do # 1分毎に実行
-  # 「Book」モデルの、「self.create_book」メソッドを実行
-  runner 'NomineeMap.create_award'
+# cronのログの吐き出し場所。ここでエラー内容を確認する
+set :output, "#{Rails.root}/log/cron.log"
+
+
+every 30.minute do
+  rake "midnight_reset:reset_nominee_map"
 end
+
+every 30.minute do
+  rake "midnight_reset:create_award"
+end
+

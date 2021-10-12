@@ -7,8 +7,11 @@
           ◆ Look this weeks nominee
         .p-5.text-center
           %h4
-            Best Fashionable
+            Best Faded
           - if @jeans.where(nominee_id: 1).present?
+            - faded_award =  @jeans.where(nominee_id: 1)
+            // - most_obtained =  faded_award.first
+            // - most_obtained.create_award(most_obtained.jeans_id, most_obtained.nominee_id)
             %table.table.table-dark
               %thead
                 %tr
@@ -47,7 +50,7 @@
                   %th.text-center{scope:"col"}
                     number of nominees obtained
               %tbody
-              // faded_award = ノミニーインスタンスが入っている
+              // faded_award = NomineeMapインスタンスが入っている
               - faded_award =  @jeans.where(nominee_id: 2)
               - faded_award.each do |f|
                 - jeans = Jeans.find_by(id: f.jeans_id)
@@ -64,7 +67,7 @@
 
         .p-5.text-center
           %h4
-            Best Fashionable
+            Best Whisker
           - if @jeans.where(nominee_id: 3).present?
             %table.table.table-dark
               %thead
@@ -92,7 +95,7 @@
 
         .p-5.text-center
           %h4
-            Best Fashionable
+            Best Shevron
           - if @jeans.where(nominee_id: 4).present?
             %table.table.table-dark
               %thead
@@ -120,7 +123,7 @@
 
         .p-5.text-center
           %h4
-            Best Fashionable
+            Best 501
           - if @jeans.where(nominee_id: 5).present?
             %table.table.table-dark
               %thead
