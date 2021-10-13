@@ -63,7 +63,7 @@
           - Nominee.names.each do | name, nominee_id |
             .d-flex
 
-              = f.radio_button :nominee_id, nominee_id, hide_label: true
+              = f.radio_button NomineeMap.nominee_ids.keys, hide_label: true
               = f.hidden_field :jeans_id, value: post.jeans_id
               = f.hidden_field :user_id, value: current_user.id
               = f.label name

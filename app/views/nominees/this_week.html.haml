@@ -8,6 +8,8 @@
         .p-5.text-center
           %h4
             Best Faded
+          %p
+            (reset all nominees on every Monday at 12:00 pm)
           - if @jeans.where(nominee_id: 1).present?
             - faded_award =  @jeans.where(nominee_id: 1)
             // - most_obtained =  faded_award.first
@@ -40,6 +42,8 @@
         .p-5.text-center
           %h4
             Best Fashionable
+          %p
+            (reset all nominees on every Wednesday at 12:00 pm)
           - if @jeans.where(nominee_id: 2).present?
             %table.table.table-dark
               %thead
@@ -68,6 +72,8 @@
         .p-5.text-center
           %h4
             Best Whisker
+          %p
+            (reset all nominees on every Thursday at 12:00 pm)
           - if @jeans.where(nominee_id: 3).present?
             %table.table.table-dark
               %thead
@@ -96,6 +102,8 @@
         .p-5.text-center
           %h4
             Best Shevron
+          %p
+            (reset all nominees on every Friday at 12:00 pm)
           - if @jeans.where(nominee_id: 4).present?
             %table.table.table-dark
               %thead
@@ -124,6 +132,8 @@
         .p-5.text-center
           %h4
             Best 501
+          %p
+            (reset all nominees on every Tuesday at 12:00 pm)
           - if @jeans.where(nominee_id: 5).present?
             %table.table.table-dark
               %thead

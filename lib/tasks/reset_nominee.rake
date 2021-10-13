@@ -1,31 +1,84 @@
 namespace :nominee_reset do
-  desc "毎週火曜曜0:00にNomineeMapインスタンスをnilにする"
-  task :reset_nominee_map => :environment do
-    #ログ
+
+  desc "Faded_Awardインスタンスを作成する"
+  task :create_faded => :environment do
     logger = Logger.new 'log/create_award.log'
 
-    #ここから処理を書いていく
-    NomineeMap.find_each {|nominee_map| nominee_map.update!(nominee_id: nil, jeans_id: nil, user_id: nil)}
-
-    #デバッグのため
-    p "ここまでOK"
-  end
-
-  desc "Awardインスタンスを作成する"
-  task :create_award => :environment do
-
-    logger = Logger.new 'log/create_award.log'
-
-    nominees = NomineeMap.group(:nominee_id)  # ノミネートごとに投票を分ける
-    nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
-    faded_award =  nominee.where(nominee_id: 1).first 
-    jeans = Jeans.find_by(id: faded_award.jeans_id)
-    Award.create(jeans_id: jeans.id, name: faded_award.nominee_id)
-
-  # articlesテーブルで[公開日が現在時刻以前かつステータス「公開待ち」]のものを全て「公開」に変更
-    p "ごはんですよ"
+    if NomineeMap.where(nominee_id: 1).present?
+      nominees = NomineeMap.group(:nominee_id)  # ノミネートごとに投票を分ける
+      nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
+      faded_award =  nominee.where(nominee_id: 1).first   # 一番最初のインスタンス＝ 一番得票数がおおい
+      jeans = Jeans.find_by(id: faded_award.jeans_id)
+      Award.create(jeans_id: jeans.id, name: faded_award.nominee_id)
+      nominee_faded = NomineeMap.where(nominee_id: 1)
+      nominee_faded.update(nominee_id: nil, jeans_id: nil, user_id: nil)
+    end
   end
 
 
+  desc "Fashinable_Awardインスタンスを作成する"
+  task :create_fashinable => :environment do
 
+    logger = Logger.new 'log/create_award.log'
+    if NomineeMap.where(nominee_id: 2).present?
+      nominees = NomineeMap.group(:nominee_id)  # ノミネートごとに投票を分ける
+      nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
+      faded_award =  nominee.where(nominee_id: 2).first   # 一番最初のインスタンス＝ 一番得票数がおおい
+      jeans = Jeans.find_by(id: faded_award.jeans_id)
+      Award.create(jeans_id: jeans.id, name: faded_award.nominee_id)
+      nominee_faded = NomineeMap.where(nominee_id: 2)
+      nominee_faded.update(nominee_id: nil, jeans_id: nil, user_id: nil)
+    end
+  end
+
+
+
+  desc "Whisker_Awardインスタンスを作成する"
+  task :create_whisker => :environment do
+
+    logger = Logger.new 'log/create_award.log'
+    if NomineeMap.where(nominee_id: 3).present?
+      nominees = NomineeMap.group(:nominee_id)  # ノミネートごとに投票を分ける
+      nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
+      faded_award =  nominee.where(nominee_id: 3).first   # 一番最初のインスタンス＝ 一番得票数がおおい
+      jeans = Jeans.find_by(id: faded_award.jeans_id)
+      Award.create(jeans_id: jeans.id, name: faded_award.nominee_id)
+      nominee_faded = NomineeMap.where(nominee_id: 3)
+      nominee_faded.update(nominee_id: nil, jeans_id: nil, user_id: nil)
+    end
+  end
+
+
+
+  desc "Shevron_Awardインスタンスを作成する"
+  task :create_shevron => :environment do
+    logger = Logger.new 'log/create_award.log'
+
+    if NomineeMap.where(nominee_id: 4).present?
+      nominees = NomineeMap.group(:nominee_id)  # ノミネートごとに投票を分ける
+      nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
+      faded_award =  nominee.where(nominee_id: 4).first   # 一番最初のインスタンス ＝ 一番得票数がおおい
+      jeans = Jeans.find_by(id: faded_award.jeans_id)
+      Award.create(jeans_id: jeans.id, name: faded_award.nominee_id)
+      # fadedをnilにする
+      nominee_faded = NomineeMap.where(nominee_id: 4)
+      nominee_faded.update(nominee_id: nil, jeans_id: nil, user_id: nil)
+    end
+  end
+
+
+  desc "501_Awardインスタンスを作成する"
+  task :create_501 => :environment do
+    logger = Logger.new 'log/create_award.log'
+    if NomineeMap.where(nominee_id: 5).present?
+      nominees = NomineeMap.group(:nominee_id)  # ノミネートごとに投票を分ける
+      nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
+      faded_award =  nominee.where(nominee_id: 5).first   # 一番最初のインスタンス＝ 一番得票数がおおい
+      jeans = Jeans.find_by(id: faded_award.jeans_id)
+      Award.create(jeans_id: jeans.id, name: faded_award.nominee_id)
+      # fadedをnilにする
+      nominee_faded = NomineeMap.where(nominee_id: 5)
+      nominee_faded.update(nominee_id: nil, jeans_id: nil, user_id: nil)
+    end
+  end
 end
