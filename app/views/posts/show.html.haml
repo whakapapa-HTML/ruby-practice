@@ -29,8 +29,12 @@
                     = link_to tag_path(tag), class: "link edit-icon" do
                       = tag.tag_name
               .d-flex.icons
-                .position-relative.mr-3
-                  %i.fas.fa-trophy.text-warning.mr-4.torophy_color{onClick: "click_trophy_icon(this)", id: "trophy_icon_#{@post.id}" }
+                -if post_jeans.is_nominated_by?(post_jeans, current_user)
+                  .position-relative.mr-3
+                    %i.fas.fa-check-circle.mr-4.trophy_complete{onClick: "click_trophy_complete()"}
+                - else
+                  .position-relative.mr-3
+                    %i.fas.fa-trophy.text-warning.mr-4.trophy_icon{onClick: "click_trophy_icon(this)", id: "#{@post.id}"}
                 - if @post.user == current_user
                   = link_to edit_post_path(@post), class: "position-relative mr-3" do
                     %i.far.fa-edit.text-decoration-none.text-dark.edit_icon.mr-4
@@ -58,6 +62,17 @@
                   = f.submit class: "btn btn-primary mr-1"
                   .post_comment_close_button.btn.btn-dark{onclick: "click_comment_close(this)", id: "#{@post.id}"}
                     Close
+            .nominate_form.ml-3.mb-3.mr-3.pt-3.border-top{id: "nominate_form_#{@post.id}"}
+              = bootstrap_form_with url: nominee_maps_path, local: true do |f|
+                .mb-2
+                  Nominate This Jeans to...
+                .d-flex
+                  = f.select :nominee_id, NomineeMap.nominee_ids.keys, hide_label: true
+                  = f.hidden_field :jeans_id, value: @post.jeans_id
+                  = f.hidden_field :user_id, value: current_user.id
+                = f.submit 'Vote!', class: "btn btn-primary"
+                .nominate_close_button.btn.btn-dark{onclick: "close_trophy_icon(this)", id: "#{@post.id}"}
+                  Close
             - if @comments.present?
               .comments_view.ml-3.mr-3.pt-3.border-top{onclick: "comments_view(this)", id: "#{@post.id}"}
                 %p.text-info

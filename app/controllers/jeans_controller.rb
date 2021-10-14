@@ -25,6 +25,6 @@ class JeansController < ApplicationController
 
   private
     def jeans_params
-       params.require(:jeans).permit(:user_id, :brand_id, :lot_id, :year_id, :number_of_laundry, :date_of_purchase, :jeans_image) # 変更後
+       params.require(:jeans).permit(:name, :user_id, :brand_id, :lot_id, :year_id, :number_of_laundry, :date_of_purchase, :jeans_image) # 変更後
     end
 end

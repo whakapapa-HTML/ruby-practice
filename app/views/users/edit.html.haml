@@ -1,0 +1,15 @@
+.container
+  .row
+    .col-6.mx-auto
+      %h2
+        Edit Your Profile
+      = bootstrap_form_with(model: current_user, url: user_path(current_user), local: true) do |f|
+        -if current_user.image.url
+          .user_image.text-center.p-3
+            = image_tag current_user.image.url, size: "200x200", id: :img_prev, class: "text-center shadow mb-5 bg-white rounded-circle"
+        -else
+          = image_tag 'no_jeans.jpg', id: :img_prev, size: "200x230", class: "shadow mb-5 bg-white rounded-circle"
+        = f.file_field :image, {class: "file_field_message", id: "user_img"}
+        = f.text_field :name
+        = f.text_area :introduction
+        = f.submit

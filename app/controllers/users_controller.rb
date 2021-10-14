@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+before_action :authenticate_user!
 
   def show
     @user = User.find(params[:id])
@@ -17,10 +18,13 @@ class UsersController < ApplicationController
     @users = user.followers
   end
 
+  def edit
+  end
+
   def update
     user = current_user
     user.update(user_params)
-    redirect_to request.referer
+    redirect_to my_page_path
   end
 
   private

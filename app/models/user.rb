@@ -21,6 +21,6 @@ class User < ApplicationRecord
     reverse_of_relationships.find_by(following_id: user.id).present?
   end
 
-  
+
 
 end

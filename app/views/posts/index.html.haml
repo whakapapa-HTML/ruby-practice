@@ -1,50 +1,28 @@
 .container-fluid
   .row
     = render 'layouts/sidebar'
-    .col-4.mx-auto
-      %h2
-        .mb-4
-          Post Your Jeans
-      = bootstrap_form_with(url: posts_path, model: Post.new, local: true) do |f|
-        .form_group
-          = f.file_field :image, {class: "file_field_message", id: "user_img"}
-        .form-group
-          = f.text_area :body
-        .form_group
-          = f.select :jeans_id, @user_jeans.collect { |j| [j.name + j.brand.name + j.lot.number, j.id]}
-          %p.text-right
-            = link_to my_page_jeans_path, class: "link text-decoration-none" do
-              Add New Jeans ->
-          = f.text_field :tag_name, :placeholder => "Insert space when you add a hushtag yo your post!!"
-          = f.submit
-      %strong
-        .mt-4
-          View Posts
+    .col-6.mx-auto
+      .w-75
+        %h2
+          .mb-4
+            Post Your Jeans
+        = bootstrap_form_with(url: posts_path, model: Post.new, local: true) do |f|
+          .form_group
+            = f.file_field :image, {class: "file_field_message", id: "user_img"}
+          .form-group
+            = f.text_area :body
+          .form_group
+            = f.select :jeans_id, @user_jeans.collect { |j| [j.name  + j.brand.name  + j.lot.number, j.id]}
+            %p.text-right
+              = link_to my_page_jeans_path, class: "link text-decoration-none" do
+                Add New Jeans ->
+            = f.text_field :tag_name, :placeholder => "Insert space when you add a hushtag yo your post!!"
+            = f.submit
+      %h2.mt-5
+        View Posts
       - @posts.each do |post|
-        .card.mb-4
-          .bd-placeholder-img.card-img-top
-            = image_tag post.image.url, class: "card-image"
-          .card-body
-            - post_jeans = Jeans.find_by(id: post.jeans_id)
-            %strong
-              = image_tag post_jeans.jeans_image.url, size: "50x50", class: "rounded-circle"
-              #{post_jeans.name}
-            %small
-              #{post_jeans.brand.name} #{post_jeans.lot.number} #{post_jeans.year.date_of_birth}
-            %p.card-text
-              = post.body
-            .d-flex
-              - post.tags.each do |tag|
-                %p.card.rounded-pill.p-2.mr-2.small
-                  = link_to tag_path(tag), class: "text-secondary text-decoration-none edit-icon" do
-                    = tag.tag_name
-            - if current_user
-              .d-flex.icons
-                = link_to edit_post_path(post), class: "far fa-edit text-secondary text-decoration-none edit-icon" do
-                  %i.mr-3
-                %i.far.fa-comment.mr-3
-                %i.far.fa-heart.mr-3
-                %i.far.fa-share-square.mr-3
-            %p.text-right.small
-              = post.created_at.strftime("%Y-%m-%d %H:%M")
+        - comment = post.comments.build
+        - comment_reply = post.comments.build
+        - comments = Comment.includes(:user).where(post_id: post.id).order(created_at: :desc)
+        = render 'posts/posts', {post: post, comment: comment, comment_reply: comment_reply, comments: comments }
     .col-3
