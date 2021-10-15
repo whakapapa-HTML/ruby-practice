@@ -6,6 +6,7 @@ before_action :authenticate_user!
   end
 
   def my_page
+    @user = current_user
   end
 
   def followings

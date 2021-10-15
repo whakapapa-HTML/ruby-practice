@@ -13,7 +13,7 @@
           = current_user.name
         .ml-auto
           = current_user.introduction
-        .d-flex
+        .d-flex.p-2
           %p
             Posts
             %strong
@@ -30,4 +30,43 @@
           = link_to my_page_edit_path do
             %strong edit your profile
     .col-6
-      
+      %h2.mb-5
+        Records of Award
+      - if @user.jeans.present?
+        .d-flex.p-2.flex-column
+          .d-flex.p-2
+            %i.fas.fa-award.award_icons
+            %h5.ml-3.d-flex.align-items-center
+              Best Faded Award
+          - user_jeans = @user.jeans
+          - user_jeans.each do |u|
+            - if u.awards.present?
+              %table.table.table-dark.small.m-4
+                %thead
+                  %tr
+                    %th{scope: "col"}
+                      Jeans of Award
+                    %th{scope: "col"}
+                      Number of Award
+                    %th{scope: "col"}
+                %tbody
+                  %tr
+                    %th{scope: "row"}
+                      1
+                    %td
+                      Mark
+                    %td
+                      Otto
+
+          .d-flex.p-2
+            %i.fas.fa-award.award_icons
+            Best Fashinable Award
+          .d-flex.p-2
+            %i.fas.fa-award.award_icons
+            Best Whisker Award
+          .d-flex.p-2
+            %i.fas.fa-award.award_icons
+            Best Shevron Award
+          .d-flex.p-2
+            %i.fas.fa-award.award_icons
+            Best 501 Award
