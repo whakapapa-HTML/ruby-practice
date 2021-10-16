@@ -1,8 +1,13 @@
 .container-fluid
   .row
-    = render 'layouts/sidebar'
-    .col-9.flex-wrap
-      - @posts.each do |post|
-        = link_to post_path(post), class: "text-decoration-none" do
-          = image_tag post.image.url, class: "other-jeans-image mt-3"
-
+    - if user_signed_in?
+      = render 'layouts/sidebar'
+      .col-9.flex-wrap
+        - @posts.each do |post|
+          = link_to post_path(post), class: "text-decoration-none" do
+            = image_tag post.image.url, class: "other-jeans-image mt-3"
+    - else
+      .col-12.text-center
+        - @posts.each do |post|
+          = link_to post_path(post), class: "text-decoration-none" do
+            = image_tag post.image.url, class: "other-jeans-image mt-3"

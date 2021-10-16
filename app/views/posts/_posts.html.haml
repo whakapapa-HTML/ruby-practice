@@ -29,9 +29,6 @@
           -else
             .position-relative.mr-3
               %i.fas.fa-trophy.text-warning.mr-4.trophy_icon{onClick: "click_trophy_icon(this)", id: "#{post.id}" }
-          - if  post.user == current_user
-            = link_to edit_post_path(post), class: "position-relative mr-3" do
-              %i.far.fa-edit.text-decoration-none.edit_icon.mr-4.text-dark
           %i.far.fa-comment.mr-3.click_comment_icon{onClick: "click_comment_icon(this)", id: "#{post.id}"}
           - if post.favorited_by?(current_user)
             = link_to post_favorites_path(post.id), class: "position-relative mr-3", method: :delete do
