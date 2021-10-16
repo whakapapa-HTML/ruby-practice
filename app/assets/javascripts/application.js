@@ -15,10 +15,13 @@
 //= require bootstrap-sprockets
 //
 //= require activestorage
-//= require_tree .
+
 //= require social-share-button
 //= require chartkick
 //= require Chart.bundle
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .
 
 /*global jQuery $*/
 
@@ -192,6 +195,54 @@
 　　}
 
   // 投票後、アラート表示
+
    function click_trophy_complete() {
        alert("Thanks for your voting!!")
    }
+
+  //　スライダー設定
+  $(document).on('turbolinks:load', function() {
+     console.log('読み込まれました');
+  $('.slick').slick({
+    dots: true,
+      infinite: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 0,　//隣あう画像のスライドするまでの間隔時間
+        speed: 10000,
+        arrows: false,
+        pauseOnFocus: false,
+        pauseOnHover: false,
+        adaptiveHeight: true,
+        cssEase: 'linear', //開始から終了まで一定に変化する
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+      ]
+  });
+});

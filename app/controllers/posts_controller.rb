@@ -2,7 +2,11 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:others]
 
   def others
-    @posts = Post.all
+    if user_signed_in?
+      @posts = Post.all
+    else
+      @posts = Post.all.shuffle
+    end
   end
 
   def index
