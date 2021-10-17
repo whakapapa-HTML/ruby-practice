@@ -37,17 +37,12 @@
                     %i.fas.fa-trophy.text-warning.mr-4.trophy_icon{onClick: "click_trophy_icon(this)", id: "#{@post.id}"}
                 %i.far.fa-comment.mr-3.click_comment_icon{onClick: "click_comment_icon(this)", id: "#{@post.id}"}
                 - if @post.favorited_by?(current_user)
-                  = link_to post_favorites_path(@post.id), class: "position-relative mr-3", method: :delete do
-                    %i.favorites_color.fas.fa-heart
-                - else
-                  = link_to post_favorites_path(@post.id), class: "position-relative mr-3", method: :post do
-                    %i.favorites_color.text-dark.far.fa-heart
-                - if @post.user.is_followed_by?(current_user)
-                  = link_to user_relationships_path(user_id: @post.user.id), class: "position-relative ml-4", method: :delete do
-                    %i.fas.fa-user.following_color.text-dark
-                - else
-                  = link_to user_relationships_path(user_id: @post.user.id), class: "position-relative ml-4", method: :post do
-                    %i.far.fa-user.following_color
+                  .div{id: "post_#{@post.id}"}
+                    .favorite_btn
+                      = render "favorites/favorite_btn", post: @post
+                  .div{id: "relationship_#{@post.id}"}
+                    .relationship_btn
+                      = render "relationships/relationship_btn", post: @post
                 .ml-5
                   = social_share_button_tag(@post.body)
             .p-3.post_comment_form{id: "post_comment_form_#{@post.id}"}

@@ -33,12 +33,9 @@
           .div{id: "post_#{post.id}"}
             .favorite_btn
               = render "favorites/favorite_btn", post: post
-          - if  post.user.is_followed_by?(current_user)
-            = link_to user_relationships_path(user_id: post.user.id), class: "position-relative ml-4", method: :delete do
-              %i.following_color.fas.fa-user.text-dark
-          - else
-            = link_to user_relationships_path(user_id: post.user.id), class: "position-relative ml-4", method: :post do
-              %i.far.fa-user.following_color
+          .div{id: "relationship_#{post.id}"}
+            .relationship_btn
+              = render "relationships/relationship_btn", post: post
           .ml-5
             = social_share_button_tag( post.body)
       .p-3.post_comment_form{id: "post_comment_form_#{post.id}"}
