@@ -30,12 +30,9 @@
             .position-relative.mr-3
               %i.fas.fa-trophy.text-warning.mr-4.trophy_icon{onClick: "click_trophy_icon(this)", id: "#{post.id}" }
           %i.far.fa-comment.mr-3.click_comment_icon{onClick: "click_comment_icon(this)", id: "#{post.id}"}
-          - if post.favorited_by?(current_user)
-            = link_to post_favorites_path(post.id), class: "position-relative mr-3", method: :delete do
-              %i.favorites_color.fas.fa-heart
-          - else
-            = link_to post_favorites_path(post.id), class: "position-relative mr-3", method: :post do
-              %i.favorites_color.far.fa-heart
+          .div{id: "post_#{post.id}"}
+            .favorite_btn
+              = render "favorites/favorite_btn", post: post
           - if  post.user.is_followed_by?(current_user)
             = link_to user_relationships_path(user_id: post.user.id), class: "position-relative ml-4", method: :delete do
               %i.following_color.fas.fa-user.text-dark

@@ -1,0 +1,6 @@
+- if post.favorited_by?(current_user)
+  = link_to post_favorites_path(post.id), class: "position-relative mr-3", method: :delete, remote: true do
+    %i.favorites_color.fas.fa-heart
+- else
+  = link_to post_favorites_path(post.id), class: "position-relative mr-3", method: :post, remote: true do
+    %i.favorites_color.far.fa-heart
