@@ -5,9 +5,9 @@
       .col-9.flex-wrap.slick
         - @posts.each do |post|
           = link_to post_path(post), class: "text-decoration-none" do
-            = image_tag post.image.url, class: "other-jeans-image mt-3"
+            = image_tag post.image.url, class: "other-jeans-image mt-3 mb-3"
     - else
       .col-12.text-center.slick
         - @posts.each do |post|
           = link_to post_path(post), class: "text-decoration-none" do
-            = image_tag post.image.url, class: "other-jeans-image mt-3"
+            = image_tag post.image.url, class: "other-jeans-image mt-3 mb-3"

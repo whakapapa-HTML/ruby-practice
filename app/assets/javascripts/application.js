@@ -204,14 +204,13 @@
   $(document).on('turbolinks:load', function() {
      console.log('読み込まれました');
   $('.slick').slick({
-    dots: true,
       infinite: true,
         slidesToShow: 5,
         slidesToScroll: 1,
+        arrows: false,  // ←この階層
         autoplay: true,
         autoplaySpeed: 0,　//隣あう画像のスライドするまでの間隔時間
         speed: 10000,
-        arrows: false,
         pauseOnFocus: false,
         pauseOnHover: false,
         adaptiveHeight: true,

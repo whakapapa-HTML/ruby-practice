@@ -1,8 +1,8 @@
 %body
-  %header
+  %header.mb-5
     %nav.navbar.navbar-expand-lg.navbar-light.p-4
       .flex-column
-        = link_to others_path, class: "text-dark text-decoration-none" do
+        = link_to others_path, class: "text-white text-decoration-none" do
           %h1.pb-0
             Jeans
           %small raise your jeans, live with jeans
@@ -11,17 +11,17 @@
         %ul.navbar-nav.ml-auto
           - if user_signed_in?
             %li.nav-item
-              = link_to "LOOK NOMINEES", this_week_path, class: 'nav-link'
+              = link_to "LOOK NOMINEES", this_week_path, class: 'text-white nav-link'
             %li.nav-item
-              = link_to 'MY PAGE', my_page_path, class: 'nav-link'
+              = link_to 'MY PAGE', my_page_path, class: 'text-white nav-link'
             %li.nav-item
-              = link_to "POST JEANS", posts_path, class: 'nav-link'
+              = link_to "POST JEANS", posts_path, class: 'text-white nav-link'
             %li.nav-item
-              = link_to "TIMELINE", timeline_path, class: 'nav-link'
+              = link_to "TIMELINE", timeline_path, class: 'text-white nav-link'
             %li.nav-item
-              = link_to "LOG OUT", destroy_user_session_path, method: :delete, class: 'nav-link'
+              = link_to "LOG OUT", destroy_user_session_path, method: :delete, class: 'text-white nav-link'
           - else
             %li.nav-item
-              = link_to "SINE UP", new_user_registration_path, class: 'nav-link  '
+              = link_to "SINE UP", new_user_registration_path, class: 'text-white nav-link'
             %li.nav-item
-              = link_to "LOG IN", new_user_session_path, class: 'nav-link  '
+              = link_to "LOG IN", new_user_session_path, class: 'text-white nav-link'

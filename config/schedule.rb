@@ -37,7 +37,7 @@ every :tuesday, at: '12pm' do
   rake "nominee_reset:create_501"
 end
 
-every :wednesday, at: '12pm' do
+every :wednesday, at: '12pm'  do
   rake "nominee_reset:create_fashinable"
 end
 
