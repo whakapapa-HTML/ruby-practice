@@ -1,0 +1,2 @@
+$("textarea").val("");
+$("post_comment_form").html("<%= escape_javascript(render 'comments/index', {comments: @comments, post: @post, comment_reply: @comment_reply}) %>");

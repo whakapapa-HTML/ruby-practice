@@ -46,68 +46,7 @@
                 .ml-5
                   = social_share_button_tag(@post.body)
             .p-3.post_comment_form{id: "post_comment_form_#{@post.id}"}
-              %strong
-                Type your message here !!
-              = bootstrap_form_with url: post_comments_path(@post.id, @comment), local: true do |f|
-                = f.text_area :content, hide_label: true
-                .d-flex.text-right
-                  = f.submit class: "btn btn-primary mr-1"
-                  .post_comment_close_button.btn.btn-dark{onclick: "click_comment_close(this)", id: "#{@post.id}"}
-                    Close
-            .nominate_form.ml-3.mb-3.mr-3.pt-3.border-top{id: "nominate_form_#{@post.id}"}
-              = bootstrap_form_with url: nominee_maps_path, local: true do |f|
-                .mb-2
-                  Nominate This Jeans to...
-                .d-flex
-                  = f.select :nominee_id, NomineeMap.nominee_ids.keys, hide_label: true
-                  = f.hidden_field :jeans_id, value: @post.jeans_id
-                  = f.hidden_field :user_id, value: current_user.id
-                = f.submit 'Vote!', class: "btn btn-primary"
-                .nominate_close_button.btn.btn-dark{onclick: "close_trophy_icon(this)", id: "#{@post.id}"}
-                  Close
-            - if @comments.present?
-              .comments_view.ml-3.mr-3.pt-3.border-top{onclick: "comments_view(this)", id: "#{@post.id}"}
-                %p.text-info
-                  View All message #{@comments.count}
-              .comment{id: "parent_comment_#{@post.id}"}
-                - @comments.each do |comment|
-                  - if comment.parent_id.nil?
-                    .flex-column.mt-3.p-5
-                      = image_tag comment.user.image.url, size: "50x50", class: "rounded-circle"
-                      %strong
-                        = comment.user.name
-                      %small
-                        = comment.created_at.strftime("%Y-%m-%d %H:%M")
-                      %i.reply_button.far.fa-comment-dots.mt-2.p-1{id: "reply-button-#{comment.id}"}
-                      .ml-5
-                        = comment.content
-                      .div{id: "reply_form_insert_point_#{comment.id}"}
-                      %template{id: "reply-form-#{comment.id}"}
-                        = bootstrap_form_with url: post_comments_path(@post.id, @comment_reply), class: "pt-3 col-10 m-auto", local: true do |f|
-                          %strong
-                            Reply
-                          = f.text_area :content, hide_label: true
-                          = f.hidden_field :post_id, value: @post.id
-                          = f.hidden_field :parent_id, value: comment.id
-                          = f.submit "Reply", class: "btn btn-primary"
-                          .reply_close_button.btn.btn-dark{ id: "#reply_close_button_#{comment.id}", onclick: "this.parentNode.innerHTML=''"}
-                            Close
-                      - if comment.replies.present?
-                        .view_replies_button.text-right.mr-3.text-primary{id: "view_#{comment.id}" }
-                          View Replies(#{comment.replies.count})
-                        .hide_replies_button.text-right.mr-3.text-primary{id: "hidden_#{comment.id}"}
-                          Hide Replies
-
-                      .reply_field.flex-column{id:"reply_comments_#{comment.id}"}
-                        - comment.replies.order(created_at: :desc).each do |reply|
-                          .text-left.mt-3.ml-5.p-3
-                            = image_tag reply.user.image.url, size: "30x30", class: "rounded-circle"
-                            %strong
-                              = reply.user.name
-                            %small
-                              = reply.created_at.strftime("%Y-%m-%d %H:%M")
-                            .mb-4.ml-5
-                              = reply.content
+              = render "comments/index",  {comments: @comments, post: @post, comment_reply: @comment_reply}
 
             - else
               %p.text-center
