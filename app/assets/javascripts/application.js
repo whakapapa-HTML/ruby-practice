@@ -130,10 +130,6 @@
           let reply_form = $(`#reply_form_insert_point_${suffix}`).after(selectedFrom.html());
           let reply_button = document.getElementById(text)
           reply_button.style.visibility ="hidden";
-
-          $('.reply_close_button').click(function(){
-            reply_button.style.visibility ="visible";
-           });
          }
       });
 
@@ -159,23 +155,6 @@
            });
          }
       });
-
-
-   // コメントフォーム表示機能
-
-    function click_comment_icon(obj) {
-      let text = $(obj).attr('id');
-      let suffix = text.replace(/[^0-9]/g, '');
-      let postForm = document.getElementById(`post_comment_form_${suffix}`)
-      postForm.style.display = "block";
-    }
-
-    function click_comment_close(obj){
-      let text = $(obj).attr('id');
-      let suffix = text.replace(/[^0-9]/g, '');
-      let postForm = document.getElementById(`post_comment_form_${suffix}`)
-      postForm.style.display = "none";
-    }
 
 
    // ノミネートフォーム表示

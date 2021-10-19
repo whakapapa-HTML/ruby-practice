@@ -1,2 +1,2 @@
 $("textarea").val("");
-$("post_comment_form").html("<%= escape_javascript(render 'comments/index', {comments: @comments, post: @post, comment_reply: @comment_reply}) %>");
+$(".comments_index #comments_and_form_<%= @post.id %>").html("<%= j(render 'comments/index', {comment: @comment, comments: @comments, post: @post, comment_reply: @comment_reply}) %>");

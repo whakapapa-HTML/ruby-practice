@@ -121,10 +121,6 @@ body {
      left: 0;
 }
 
-.post_comment_form {
-    display: none;
-}
-
 .trophy_icon::before {
     position: absolute;
     top: 0;
@@ -182,10 +178,6 @@ $size: 22px;
 // コメント表示機能
 .comments_view {
     cursor: pointer;
-}
-
-.comment {
-    display: none;
 }
 
 //　文字の点滅

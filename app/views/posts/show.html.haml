@@ -35,22 +35,28 @@
                 - else
                   .position-relative.mr-3
                     %i.fas.fa-trophy.text-warning.mr-4.trophy_icon{onClick: "click_trophy_icon(this)", id: "#{@post.id}"}
-                %i.far.fa-comment.mr-3.click_comment_icon{onClick: "click_comment_icon(this)", id: "#{@post.id}"}
-                - if @post.favorited_by?(current_user)
-                  .div{id: "post_#{@post.id}"}
-                    .favorite_btn
-                      = render "favorites/favorite_btn", post: @post
-                  .div{id: "relationship_#{@post.id}"}
-                    .relationship_btn
-                      = render "relationships/relationship_btn", post: @post
+                .div{id: "post_#{@post.id}"}
+                  .favorite_btn
+                    = render "favorites/favorite_btn", post: @post
+                .div{id: "relationship_#{@post.id}"}
+                  .relationship_btn
+                    = render "relationships/relationship_btn", post: @post
                 .ml-5
                   = social_share_button_tag(@post.body)
-            .p-3.post_comment_form{id: "post_comment_form_#{@post.id}"}
-              = render "comments/index",  {comments: @comments, post: @post, comment_reply: @comment_reply}
-
-            - else
-              %p.text-center
-                There's no message for this post yet.
+            .nominate_form.ml-3.mb-3.mr-3.pt-3.border-top{id: "nominate_form_#{@post.id}"}
+              = bootstrap_form_with url: nominee_maps_path, local: true do |f|
+                .mb-2
+                  Nominate This Jeans to...
+                .d-flex
+                  = f.select :nominee_id, NomineeMap.nominee_ids.keys, hide_label: true
+                  = f.hidden_field :jeans_id, value: @post.jeans_id
+                  = f.hidden_field :user_id, value: current_user.id
+                = f.submit 'Vote!', class: "btn btn-primary"
+                .nominate_close_button.btn.btn-dark{onclick: "close_trophy_icon(this)", id: "#{@post.id}"}
+                  Close
+            .comments_index
+              .div{id: "comments_and_form_#{@post.id}"}
+                = render "comments/index", {comment: @comment, comments: @comments, comment_reply: @comment_reply, post: @post}
         -if @difference_date < 10
           .col-2.first_step.mb-4.mt-5.border-right.border-top
             %p.strong.h4.text-white.pt-3
