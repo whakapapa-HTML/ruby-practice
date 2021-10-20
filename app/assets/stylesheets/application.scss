@@ -91,6 +91,12 @@ body {
      object-fit: contain;
 }
 
+.award-jeans-image {
+     width: 200px;
+     height: 40vh;
+     object-fit: contain;
+}
+
 .reply_button:hover {
      cursor: pointer;
 }
@@ -204,7 +210,6 @@ $size: 22px;
     display: none;
 }
 
-
 .faded_award_font {
     color: 	#000080;
 }
@@ -223,4 +228,8 @@ $size: 22px;
 
 .best_501_award_font {
     color: #CD5C5C ;
+}
+
+.fa-hand-point-left, .fa-trophy {
+  font-size: 400%
 }
