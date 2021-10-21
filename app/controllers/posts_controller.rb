@@ -4,6 +4,9 @@ class PostsController < ApplicationController
   def others
     if user_signed_in?
       @posts = Post.all
+      from  = Time.current.at_beginning_of_day
+      to    = (from - 6.day).at_end_of_day
+      @winners = AwardMap.where(created_at: to...from)
     else
       @posts = Post.all.shuffle
       # 一週間分のレコードを取得
