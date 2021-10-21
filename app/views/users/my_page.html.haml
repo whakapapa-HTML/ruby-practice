@@ -33,139 +33,138 @@
     .col-6
       %h2.mb-5
         Records of Award
-      - if @user.jeans.present?
-        .d-flex.p-2.flex-column
-          .d-flex.p-2
-            %i.fas.fa-award.award_icons
-            %h5.faded_award_font.ml-3.d-flex.align-items-center
-              Best Faded Award
-          - user_jeans = @user.jeans.where('number_of_award > 0')
-          - if user_jeans.present?
-            %table.table.table-dark.small.m-4
-              %thead
-                %tr
-                  %th{scope: "col"}
-                    Jeans Image
-                  %th{scope: "col"}
-                    Jeans Name
-                  %th{scope: "col"}
-                    Time of Award
-              %tbody
-                - user_jeans.each do |award_jeans|
-                  - award_jeans.award_maps.order(created_at: "desc").each do |award_map|
-                    - if award_map.award_id == 1
-                      %tr
-                        %td{scope: "row"}
-                          = image_tag award_jeans.jeans_image.url,size: "40x40", class: "rounded-circle"
-                        %td
-                          = award_jeans.name
-                        %td
-                          = award_map.created_at.strftime("%Y-%m-%d-%a")
+      .d-flex.p-2.flex-column
+        .d-flex.p-2
+          %i.fas.fa-award.award_icons
+          %h5.faded_award_font.ml-3.d-flex.align-items-center
+            Best Faded Award
+        - user_jeans = @user.jeans.where('number_of_award > 0')
+        - if user_jeans.present?
+          %table.table.table-dark.small.m-4
+            %thead
+              %tr
+                %th{scope: "col"}
+                  Jeans Image
+                %th{scope: "col"}
+                  Jeans Name
+                %th{scope: "col"}
+                  Time of Award
+            %tbody
+              - user_jeans.each do |award_jeans|
+                - award_jeans.award_maps.order(created_at: "desc").each do |award_jean|
+                  - if award_jean.award_id == "Best Faded"
+                    %tr
+                      %td{scope: "row"}
+                        = image_tag award_jeans.jeans_image.url, size: "40x40", class: "rounded-circle"
+                      %td
+                        = award_jeans.name
+                      %td
+                        = award_map.created_at.strftime("%Y-%m-%d-%a")
 
-          .d-flex.p-2
-            %i.fas.fa-award.award_icons
-            %h5.fashionable_award_font.ml-3.d-flex.align-items-center
-              Best Fashinable Award
-          - user_jeans = @user.jeans.where('number_of_award > 0')
-          - if user_jeans.present?
-            %table.table.table-dark.small.m-4
-              %thead
-                %tr
-                  %th{scope: "col"}
-                    Jeans Image
-                  %th{scope: "col"}
-                    Jeans Name
-                  %th{scope: "col"}
-                    Time of Award
-              %tbody
-                - user_jeans.each do |award_jeans|
-                  - award_jeans.award_maps.order(created_at: "desc").each do |award_map|
-                    - if award_map.award_id == 2
-                      %tr
-                        %td{scope: "row"}
-                          = image_tag award_jeans.jeans_image.url,size: "40x40", class: "rounded-circle"
-                        %td
-                          = award_jeans.name
-                        %td
-                          = award_map.created_at.strftime("%Y-%m-%d-%a")
+        .d-flex.p-2
+          %i.fas.fa-award.award_icons
+          %h5.fashionable_award_font.ml-3.d-flex.align-items-center
+            Best Fashinable Award
+        - user_jeans = @user.jeans.where('number_of_award > 0')
+        - if user_jeans.present?
+          %table.table.table-dark.small.m-4
+            %thead
+              %tr
+                %th{scope: "col"}
+                  Jeans Image
+                %th{scope: "col"}
+                  Jeans Name
+                %th{scope: "col"}
+                  Time of Award
+            %tbody
+              - user_jeans.each do |award_jeans|
+                - award_jeans.award_maps.order(created_at: "desc").each do |award_map|
+                  - if award_map.award_id == "Best Fashionable"
+                    %tr
+                      %td{scope: "row"}
+                        = image_tag award_jeans.jeans_image.url,size: "40x40", class: "rounded-circle"
+                      %td
+                        = award_jeans.name
+                      %td
+                        = award_map.created_at.strftime("%Y-%m-%d-%a")
 
-          .d-flex.p-2
-            %i.fas.fa-award.award_icons
-            %h5.whisker_award_font.ml-3.d-flex.align-items-center
-              Best Whisker Award
-          - user_jeans = @user.jeans.where('number_of_award > 0')
-          - if user_jeans.present?
-            %table.table.table-dark.small.m-4
-              %thead
-                %tr
-                  %th{scope: "col"}
-                    Jeans Image
-                  %th{scope: "col"}
-                    Jeans Name
-                  %th{scope: "col"}
-                    Time of Award
-              %tbody
-                - user_jeans.each do |award_jeans|
-                  - award_jeans.award_maps.order(created_at: "desc").each do |award_map|
-                    - if award_map.award_id == 3
-                      %tr
-                        %td{scope: "row"}
-                          = image_tag award_jeans.jeans_image.url,size: "40x40", class: "rounded-circle"
-                        %td
-                          = award_jeans.name
-                        %td
-                          = award_map.created_at.strftime("%Y-%m-%d-%a")
+        .d-flex.p-2
+          %i.fas.fa-award.award_icons
+          %h5.whisker_award_font.ml-3.d-flex.align-items-center
+            Best Whisker Award
+        - user_jeans = @user.jeans.where('number_of_award > 0')
+        - if user_jeans.present?
+          %table.table.table-dark.small.m-4
+            %thead
+              %tr
+                %th{scope: "col"}
+                  Jeans Image
+                %th{scope: "col"}
+                  Jeans Name
+                %th{scope: "col"}
+                  Time of Award
+            %tbody
+              - user_jeans.each do |award_jeans|
+                - award_jeans.award_maps.order(created_at: "desc").each do |award_map|
+                  - if award_map.award_id == "Best Whisker"
+                    %tr
+                      %td{scope: "row"}
+                        = image_tag award_jeans.jeans_image.url,size: "40x40", class: "rounded-circle"
+                      %td
+                        = award_jeans.name
+                      %td
+                        = award_map.created_at.strftime("%Y-%m-%d-%a")
 
-          .d-flex.p-2
-            %i.fas.fa-award.award_icons
-            %h5.shevron_award_font.ml-3.d-flex.align-items-center
-              Best Shevron Award
-          - user_jeans = @user.jeans.where('number_of_award > 0')
-          - if user_jeans.present?
-            %table.table.table-dark.small.m-4
-              %thead
-                %tr
-                  %th{scope: "col"}
-                    Jeans Image
-                  %th{scope: "col"}
-                    Jeans Name
-                  %th{scope: "col"}
-                    Time of Award
-              %tbody
-                - user_jeans.each do |award_jeans|
-                  - award_jeans.award_maps.order(created_at: "desc").each do |award_map|
-                    - if award_map.award_id == 4
-                      %tr
-                        %td{scope: "row"}
-                          = image_tag award_jeans.jeans_image.url,size: "40x40", class: "rounded-circle"
-                        %td
-                          = award_jeans.name
-                        %td
-                          = award_map.created_at.strftime("%Y-%m-%d-%a")
+        .d-flex.p-2
+          %i.fas.fa-award.award_icons
+          %h5.shevron_award_font.ml-3.d-flex.align-items-center
+            Best Shevron Award
+        - user_jeans = @user.jeans.where('number_of_award > 0')
+        - if user_jeans.present?
+          %table.table.table-dark.small.m-4
+            %thead
+              %tr
+                %th{scope: "col"}
+                  Jeans Image
+                %th{scope: "col"}
+                  Jeans Name
+                %th{scope: "col"}
+                  Time of Award
+            %tbody
+              - user_jeans.each do |award_jeans|
+                - award_jeans.award_maps.order(created_at: "desc").each do |award_map|
+                  - if award_map.award_id == "Best Shevron"
+                    %tr
+                      %td{scope: "row"}
+                        = image_tag award_jeans.jeans_image.url,size: "40x40", class: "rounded-circle"
+                      %td
+                        = award_jeans.name
+                      %td
+                        = award_map.created_at.strftime("%Y-%m-%d-%a")
 
-          .d-flex.p-2
-            %i.fas.fa-award.award_icons
-            %h5.best_501_award_font.ml-3.d-flex.align-items-center
-              Best 501 Award
-          - user_jeans = @user.jeans.where('number_of_award > 0')
-          - if user_jeans.present?
-            %table.table.table-dark.small.m-4
-              %thead
-                %tr
-                  %th{scope: "col"}
-                    Jeans Image
-                  %th{scope: "col"}
-                    Jeans Name
-                  %th{scope: "col"}
-                    Time of Award
-              %tbody
-                - user_jeans.each do |award_jeans|
-                  - award_jeans.award_maps.order(created_at: "desc").each do |award_map|
-                    - if award_map.award_id == 5
-                      %tr
-                        %td{scope: "row"}
-                          = image_tag award_jeans.jeans_image.url,size: "40x40", class: "rounded-circle"
-                        %td
-                          = award_jeans.name
-                        %td
-                          = award_map.created_at.strftime("%Y-%m-%d-%a")
+        .d-flex.p-2
+          %i.fas.fa-award.award_icons
+          %h5.best_501_award_font.ml-3.d-flex.align-items-center
+            Best 501 Award
+        - user_jeans = @user.jeans.where('number_of_award > 0')
+        - if user_jeans.present?
+          %table.table.table-dark.small.m-4
+            %thead
+              %tr
+                %th{scope: "col"}
+                  Jeans Image
+                %th{scope: "col"}
+                  Jeans Name
+                %th{scope: "col"}
+                  Time of Award
+            %tbody
+              - user_jeans.each do |award_jeans|
+                - award_jeans.award_maps.order(created_at: "desc").each do |award_map|
+                  - if award_map.award_id == "Best 501"
+                    %tr
+                      %td{scope: "row"}
+                        = image_tag award_jeans.jeans_image.url,size: "40x40", class: "rounded-circle"
+                      %td
+                        = award_jeans.name
+                      %td
+                        = award_map.created_at.strftime("%Y-%m-%d-%a")

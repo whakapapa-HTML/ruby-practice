@@ -8,6 +8,7 @@ namespace :nominee_reset do
       nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
       faded_award =  nominee.where(nominee_id: 1).first   # 一番最初のインスタンス＝ 一番得票数がおおい
       jeans = Jeans.find_by(id: faded_award.jeans_id)
+      jeans.increment!(:number_of_award, 1)
       AwardMap.create(jeans_id: jeans.id, award_id: faded_award.class.nominee_ids[faded_award.nominee_id])
       nominee_faded = NomineeMap.where(nominee_id: 1)
       nominee_faded.update(nominee_id: nil, jeans_id: nil, user_id: nil)
@@ -23,6 +24,7 @@ namespace :nominee_reset do
       nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
       faded_award =  nominee.where(nominee_id: 2).first   # 一番最初のインスタンス＝ 一番得票数がおおい
       jeans = Jeans.find_by(id: faded_award.jeans_id)
+      jeans.increment!(:number_of_award, 1)
       AwardMap.create(jeans_id: jeans.id, award_id: faded_award.class.nominee_ids[faded_award.nominee_id])
       nominee_faded = NomineeMap.where(nominee_id: 2)
       nominee_faded.update(nominee_id: nil, jeans_id: nil, user_id: nil)
@@ -39,6 +41,7 @@ namespace :nominee_reset do
       nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
       faded_award =  nominee.where(nominee_id: 3).first   # 一番最初のインスタンス＝ 一番得票数がおおい
       jeans = Jeans.find_by(id: faded_award.jeans_id)
+      jeans.increment!(:number_of_award, 1)
       AwardMap.create(jeans_id: jeans.id, award_id: faded_award.class.nominee_ids[faded_award.nominee_id])
       nominee_faded = NomineeMap.where(nominee_id: 3)
       nominee_faded.update(nominee_id: nil, jeans_id: nil, user_id: nil)
@@ -55,6 +58,7 @@ namespace :nominee_reset do
       nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
       faded_award =  nominee.where(nominee_id: 4).first   # 一番最初のインスタンス ＝ 一番得票数がおおい
       jeans = Jeans.find_by(id: faded_award.jeans_id)
+      jeans.increment!(:number_of_award, 1)
       AwardMap.create(jeans_id: jeans.id, award_id: faded_award.class.nominee_ids[faded_award.nominee_id])
       # fadedをnilにする
       nominee_faded = NomineeMap.where(nominee_id: 4)
@@ -72,6 +76,7 @@ namespace :nominee_reset do
       nominee = nominees.group(:jeans_id).order('count(nominee_id) desc') # 投票が多かった順にジーンズを並べる
       faded_award =  nominee.where(nominee_id: 5).first   # 一番最初のインスタンス＝ 一番得票数がおおい
       jeans = Jeans.find_by(id: faded_award.jeans_id)
+      jeans.increment!(:number_of_award, 1)
       AwardMap.create(jeans_id: jeans.id, award_id: faded_award.class.nominee_ids[faded_award.nominee_id]) # enumではrails5よりkeyが出力されるため、class.カラム名[インスタンス.カラム]で取り出す
       # fadedをnilにする
       nominee_faded = NomineeMap.where(nominee_id: 5)

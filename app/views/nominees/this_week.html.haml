@@ -154,8 +154,6 @@
                       = image_tag jeans.user.image.url, size: "40x40", class: "rounded-circle"
                   %th.pr-3.text-center
                     = jeans.name
-                  %td.pr-3.text-center
-                    = jeans.id
                   %td.text-center
                     = jeans.nominee_maps.where(nominee_id: 5).count
           - else

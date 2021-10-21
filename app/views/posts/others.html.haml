@@ -14,7 +14,7 @@
       .col-3
       .col-9
         .d-flex
-          %i.fas.fa-trophy.pt-5.text-warning.fa-trophy_icon
+          %i.fas.fa-trophy.pt-5.pl-5.text-warning.fa-trophy_icon
           %h1.p-5
             This weeks winners
             %span
@@ -23,12 +23,12 @@
         .d-flex
           - @winners.each do |winner|
             .d-flex.flex-column.p-3
-              %h5
+              %p
                 %i.fas.fa-crown.text-warning
                 = winner.award_id
               - jeans =  Jeans.find_by(id: winner.jeans_id)
               = link_to user_jeans_index_path(user_id: jeans.user_id), class: "text-decoration-none" do
-                = image_tag jeans.jeans_image.url, class: "award-jeans-image mt-3 mb-3 rounded"
+                = image_tag jeans.jeans_image.url, class: "award-jeans-image_logged_in mb-3 rounded"
 
     - else
       .col-12
