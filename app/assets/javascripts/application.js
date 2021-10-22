@@ -129,7 +129,10 @@
           let selectedFrom = $(`#reply-form-${suffix}`)
           let reply_form = $(`#reply_form_insert_point_${suffix}`).after(selectedFrom.html());
           let reply_button = document.getElementById(text)
-          reply_button.style.visibility ="hidden";
+          reply_button.style.visibility = "hidden";
+          $('.reply_close_button').click(function(){
+              reply_button.style.visibility = "";
+          });
          }
       });
 
