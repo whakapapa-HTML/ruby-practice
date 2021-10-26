@@ -81,3 +81,7 @@ gem 'social-share-button'
 gem 'chartkick'
 
 gem 'whenever', require: false
+
+group :production do
+  gem 'mysql2'
+end
