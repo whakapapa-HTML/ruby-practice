@@ -7,11 +7,12 @@
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
     %link{href: "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css", rel: "stylesheet", type: "text/css"}/
+    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %link{href:"https://fonts.googleapis.com/css2?family=Ultra&display=swap", rel: "stylesheet"}
     %script{src: "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js", type: "text/javascript"}
     %link{rel:"stylesheet", href:"https://unpkg.com/charts.css/dist/charts.min.css"}
-    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+
   %body
     .bg-mask
       = render 'layouts/header'
