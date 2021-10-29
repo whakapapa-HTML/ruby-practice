@@ -22,13 +22,4 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  database: <%= ENV['DB_DATABASE'] %>
-
-  charset: utf8mb4
-  collation: utf8mb4_general_ci
-  host: <%= ENV['DB_HOST'] %>
-  username: <%= ENV['DB_USERNAME'] %> git remote -v
-  password: <%= ENV['DB_PASSWORD'] %>
+  database: mysql2
