@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_081558) do
+ActiveRecord::Schema.define(version: 2021_10_30_082523) do
 
   create_table "award_maps", force: :cascade do |t|
     t.integer "award_id"
