@@ -22,4 +22,5 @@ test:
 
 production:
   <<: *default
-  database: mysql2
+  adapter: postgresql
+  encoding: unicode
