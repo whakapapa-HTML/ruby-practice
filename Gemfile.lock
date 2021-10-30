@@ -299,7 +299,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     ssrf_filter (1.0.7)
     swiper (0.0.3)
     temple (0.8.2)
@@ -366,7 +365,6 @@ DEPENDENCIES
   social-share-button
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
   swiper
   turbolinks (~> 5)
   tzinfo-data
