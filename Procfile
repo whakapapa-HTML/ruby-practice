@@ -1,1 +1,1 @@
-web: denim
+web: bin/denim
