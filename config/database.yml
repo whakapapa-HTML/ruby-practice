@@ -10,6 +10,9 @@ default: &default
   timeout: 5000
 
 development:
+  <<: *default
+  database: myapp_test
+  port: 5432
   url: <%= ENV['DATABASE_URL'] %>
   adapter: postgresql
   encoding: unicode
