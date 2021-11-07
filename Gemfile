@@ -39,6 +39,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Use sqlite3 as the database for Active Record
+  gem 'mysql2', '~> 0.5.3'
 end
 
 group :development do
@@ -57,6 +58,10 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+end
+
+group :production do
+  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -80,4 +85,4 @@ gem 'social-share-button'
 gem 'chartkick'
 
 gem 'whenever', require: false
-gem 'pg'
+
