@@ -11,7 +11,7 @@ default: &default
 
 development:
   <<: *default
-  host: shu
+  host: localhost
   port: 5432
   url: <%= ENV['DATABASE_URL'] %>
   adapter: postgresql
